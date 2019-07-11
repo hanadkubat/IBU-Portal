@@ -4,7 +4,7 @@ import Nav from '../../Components/Nav';
 export default class Dashboard extends Component {
     render() {
         return (
-            <div className="container">
+            <div>
                 <Nav />
             </div>
         )
