@@ -24,7 +24,7 @@ export default function Nav() {
           <Typography variant="h6" color="inherit" className={classes.title}>
             Mibo portal
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">Odjava</Button>
         </Toolbar>
       </AppBar>
     </div>
