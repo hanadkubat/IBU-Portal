@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.2.1",
     "bootstrap": "^4.3.1",
     "react": "^16.8.6",
+    "react-azure-adb2c": "^0.2.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
