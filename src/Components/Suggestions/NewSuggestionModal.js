@@ -1,36 +1,92 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Modal, TextField, Button } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    position: 'absolute',
-    width: 400,
+    position: "",
+    width: "400px",
+    margin: "0 auto",
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 4),
-    outline: 'none',
+    outline: "none",
+    marginTop: "20%"
   },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  }
 }));
 
 export default function SimpleModal(props) {
   const classes = useStyles();
 
+  const [title, setTitle] = useState("");
+  const [multiline, setMultiline] = useState("");
+
+  const submitForm = event => {
+    event.preventDefault();
+    console.log({ title, multiline });
+  };
+
   return (
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={props.isOpen}
-        onClose={props.handleClose}
-      >
-        <div className={classes.paper}>
-          <h2 id="modal-title">Text in a modal</h2>
-          <p id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-        </div>
-      </Modal>
+    <Modal
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      open={props.isOpen}
+      onClose={props.handleClose}
+      onEscapeKeyDown={props.handleClose}
+    >
+      <div className={classes.paper}>
+        <h4 id="modal-title" className="text-center">
+          Novi prijedlog
+        </h4>
+        <form onSubmit={submitForm} className={classes.form}>
+          <TextField
+            required
+            id="outlined-required"
+            label="Naslov"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            className={classes.textField}
+            margin="normal"
+            variant="outlined"
+            helperText="upisite naslov prijedloga"
+          />
+          <TextField
+            id="outlined-multiline-flexible"
+            label="Prijedlog"
+            multiline
+            required
+            value={multiline}
+            onChange={e => setMultiline(e.target.value)}
+            margin="normal"
+            helperText="upisite tekst prijedloga"
+            variant="outlined"
+          />
+          <div className="mt-2 d-flex flex-wrap">
+            <Button
+              onClick={props.handleClose}
+              variant="contained"
+              size="small"
+              className="mx-1"
+            >
+              Otkazi
+            </Button>
+            <Button
+              type="submit"
+              variant="contained"
+              color="secondary"
+              size="small"
+              className="mx-1"
+            >
+              Predlozi
+            </Button>
+          </div>
+        </form>
+      </div>
+    </Modal>
   );
 }
