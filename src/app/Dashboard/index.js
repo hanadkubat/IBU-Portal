@@ -1,34 +1,33 @@
 import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import Container from "@material-ui/core/Container";
+import {
+  CssBaseline,
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Container
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
 
 import { Switch, Route } from "react-router-dom";
 
 //custom components
-import News from '../../Components/News';
-import Suggestions from '../../Components/Suggestions';
+import News from "../../Components/News";
+import Suggestions from "../../Components/Suggestions";
 
 //logo
-import logo from '../../assets/mibo.png';
-import { maxHeight } from "@material-ui/system";
+import logo from "../../assets/mibo.png";
 const logoStyle = {
-  maxWidth : '128px',
-  maxHeight : '40px'
-}
+  maxWidth: "128px",
+  maxHeight: "40px"
+};
 
 const drawerWidth = 240;
 
@@ -113,14 +112,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div className={classes.root}>
@@ -152,11 +150,6 @@ export default function Dashboard() {
           >
             <img src={logo} alt="mibo" style={logoStyle} />
           </Typography>
-          {/*<IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-            </IconButton>*/}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -180,8 +173,8 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Switch>
-            <Route exact path="/dashboard" component={Suggestions} />  
-            <Route path="/dashboard/news" component={News} /> 
+            <Route exact path="/dashboard" component={Suggestions} />
+            <Route path="/dashboard/news" component={News} />
           </Switch>
         </Container>
       </main>

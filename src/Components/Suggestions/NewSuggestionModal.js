@@ -1,27 +1,28 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Modal, TextField, Button } from "@material-ui/core";
+import { Modal, TextField, Button, useMediaQuery } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    position: "",
-    width: "400px",
-    margin: "0 auto",
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 4),
-    outline: "none",
-    marginTop: "20%"
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center"
-  }
-}));
+const useStyles = isPhone =>
+  makeStyles(theme => ({
+    paper: {
+      position: "",
+      width: isPhone ? "320px" : "400px",
+      margin: "0 auto",
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 4),
+      outline: "none",
+      marginTop: "20%"
+    },
+    form: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center"
+    }
+  }));
 
 export default function SimpleModal(props) {
-  const classes = useStyles();
+  const classes = useStyles(useMediaQuery("(max-width:400px)"))();
 
   const [title, setTitle] = useState("");
   const [multiline, setMultiline] = useState("");
@@ -33,11 +34,9 @@ export default function SimpleModal(props) {
 
   return (
     <Modal
-      aria-labelledby="simple-modal-title"
-      aria-describedby="simple-modal-description"
       open={props.isOpen}
-      onClose={props.handleClose}
-      onEscapeKeyDown={props.handleClose}
+      onClose={() => props.handleClose("newModalOpen")}
+      onEscapeKeyDown={() => props.handleClose("newModalOpen")}
     >
       <div className={classes.paper}>
         <h4 id="modal-title" className="text-center">
@@ -68,14 +67,6 @@ export default function SimpleModal(props) {
           />
           <div className="mt-2 d-flex flex-wrap">
             <Button
-              onClick={props.handleClose}
-              variant="contained"
-              size="small"
-              className="mx-1"
-            >
-              Otkazi
-            </Button>
-            <Button
               type="submit"
               variant="contained"
               color="secondary"
@@ -83,6 +74,14 @@ export default function SimpleModal(props) {
               className="mx-1"
             >
               Predlozi
+            </Button>
+            <Button
+              onClick={() => props.handleClose("newModalOpen")}
+              variant="contained"
+              size="small"
+              className="mx-1"
+            >
+              Otkazi
             </Button>
           </div>
         </form>

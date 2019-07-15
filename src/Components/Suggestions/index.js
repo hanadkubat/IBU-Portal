@@ -4,22 +4,24 @@ import AddIcon from "@material-ui/icons/Add";
 
 import Suggestion from "./Suggestion";
 import NewSuggestionModal from './NewSuggestionModal';
+import SuggestionDetailsModal from './SuggestionDetailsModal';
 
 export default class Suggestions extends Component {
   constructor(props){
     super(props);
     this.state = {
-      modalOpen: false
+      newModalOpen: false,
+      detailsModalOpen: false
     }
   }
 
   //modal handlers
-  handleOpen = () => {
-    this.setState({modalOpen: true})
+  handleOpen = (modal) => {
+    this.setState({[modal]: true})
   };
 
-  handleClose = () => {
-    this.setState({modalOpen: false})
+  handleClose = (modal) => {
+    this.setState({[modal]: false})
   };
 
 
@@ -29,13 +31,18 @@ export default class Suggestions extends Component {
         <NewSuggestionModal
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
-          isOpen={this.state.modalOpen} 
+          isOpen={this.state.newModalOpen} 
         />
-      <Grid container spacing={3}>
+        <SuggestionDetailsModal
+          handleOpen={this.handleOpen}
+          handleClose={this.handleClose}
+          isOpen={this.state.detailsModalOpen} 
+        />
+      <Grid container spacing={3} alignItems="center">
 
         <Grid item xs={12} lg={4}>
           <Grid container justify="center">
-            <Fab color="secondary" aria-label="Add" onClick={this.handleOpen}>
+            <Fab color="secondary" aria-label="Add" onClick={() => this.handleOpen('newModalOpen')}>
               <AddIcon />
             </Fab>
           </Grid>
@@ -43,21 +50,22 @@ export default class Suggestions extends Component {
 
         <Grid item xs={12} md={6} lg={4}>
           <Grid container justify="center">
-            <Suggestion />
+            <Suggestion modalHandler={this.handleOpen} />
           </Grid>
         </Grid>
 
         <Grid item xs={12} md={6} lg={4}>
           <Grid container justify="center">
-            <Suggestion />
+            <Suggestion modalHandler={this.handleOpen} />
           </Grid>
         </Grid>
 
         <Grid item xs={12} md={6} lg={4}>
           <Grid container justify="center">
-            <Suggestion />
+            <Suggestion modalHandler={this.handleOpen} />
           </Grid>
         </Grid>
+
 
       </Grid>
       </div>
