@@ -22,6 +22,14 @@ import { Switch, Route } from "react-router-dom";
 import News from '../../Components/News';
 import Suggestions from '../../Components/Suggestions';
 
+//logo
+import logo from '../../assets/mibo.png';
+import { maxHeight } from "@material-ui/system";
+const logoStyle = {
+  maxWidth : '128px',
+  maxHeight : '40px'
+}
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -118,6 +126,7 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
+        color="secondary"
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
@@ -141,7 +150,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            MIBO Portal
+            <img src={logo} alt="mibo" style={logoStyle} />
           </Typography>
           {/*<IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
