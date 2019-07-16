@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Paper, makeStyles } from "@material-ui/core";
 import { Comment } from "@material-ui/icons";
+import {withRouter} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -9,11 +10,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Suggestion(props) {
+function Suggestion(props) {
   const classes = useStyles();
 
   return (
-    <div onClick={() => props.modalHandler('detailsModalOpen')}>
+    <div onClick={() => props.history.push('/dashboard/suggestion/23')}>
       <Paper className={classes.root}>
         <Typography variant="h6" component="h3">
           This is a sheet of paper.
@@ -31,3 +32,5 @@ export default function Suggestion(props) {
     </div>
   );
 }
+
+export default withRouter(Suggestion);

@@ -21,6 +21,7 @@ import { Switch, Route } from "react-router-dom";
 //custom components
 import News from "../../Components/News";
 import Suggestions from "../../Components/Suggestions";
+import SuggestionDetails from '../../Components/Suggestions/SuggestionDetails';
 
 //logo
 import logo from "../../assets/mibo.png";
@@ -174,6 +175,7 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Switch>
             <Route exact path="/dashboard" component={Suggestions} />
+            <Route exact path="/dashboard/suggestion/:id" component={SuggestionDetails} />
             <Route path="/dashboard/news" component={News} />
           </Switch>
         </Container>
