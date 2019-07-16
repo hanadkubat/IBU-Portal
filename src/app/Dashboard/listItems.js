@@ -45,23 +45,32 @@ export const mainListItems = (
 export const secondaryListItems = (
   <div>
     <ListSubheader inset>Administracija</ListSubheader>
+
+    <Link to="/dashboard/admin/suggestions" style={linkStyle}>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Korisnicki prijedlozi" />
     </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Novosti" />
-    </ListItem>
+    </Link>
+
+    <Link to="/dashboard/admin/comments" style={linkStyle}>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Komentari" />
     </ListItem>
+    </Link>
+
+    <Link to="/dashboard/admin/news" style={linkStyle}>
+    <ListItem button>
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Novosti" />
+    </ListItem>
+    </Link>
   </div>
 );

@@ -23,6 +23,9 @@ import News from "../../Components/News";
 import Suggestions from "../../Components/Suggestions";
 import SuggestionDetails from '../../Components/Suggestions/SuggestionDetails';
 
+//custom admin components
+import AdminSuggestions from '../../Components/Admin/AdminSuggestions';
+
 //logo
 import logo from "../../assets/mibo.png";
 const logoStyle = {
@@ -177,6 +180,9 @@ export default function Dashboard() {
             <Route exact path="/dashboard" component={Suggestions} />
             <Route exact path="/dashboard/suggestion/:id" component={SuggestionDetails} />
             <Route path="/dashboard/news" component={News} />
+            <Route path="/dashboard/admin/suggestions" component={AdminSuggestions} />
+            <Route path="/dashboard/admin/comments" component={AdminSuggestions} />
+            <Route path="/dashboard/admin/news" component={AdminSuggestions} />
           </Switch>
         </Container>
       </main>
