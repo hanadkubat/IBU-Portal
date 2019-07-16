@@ -22,6 +22,7 @@ import { Switch, Route } from "react-router-dom";
 import News from "../../Components/News";
 import Suggestions from "../../Components/Suggestions";
 import SuggestionDetails from '../../Components/Suggestions/SuggestionDetails';
+import NotFound from '../../Components/NotFound';
 
 //custom admin components
 import AdminSuggestions from '../../Components/Admin/AdminSuggestions';
@@ -183,6 +184,7 @@ export default function Dashboard() {
             <Route path="/dashboard/admin/suggestions" component={AdminSuggestions} />
             <Route path="/dashboard/admin/comments" component={AdminSuggestions} />
             <Route path="/dashboard/admin/news" component={AdminSuggestions} />
+            <Route component={NotFound} />
           </Switch>
         </Container>
       </main>
