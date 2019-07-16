@@ -26,6 +26,8 @@ import NotFound from '../../Components/NotFound';
 
 //custom admin components
 import AdminSuggestions from '../../Components/Admin/AdminSuggestions';
+import AdminComments from '../../Components/Admin/AdminComments';
+import AdminNews from '../../Components/Admin/AdminNews';
 
 //logo
 import logo from "../../assets/mibo.png";
@@ -182,8 +184,8 @@ export default function Dashboard() {
             <Route exact path="/dashboard/suggestion/:id" component={SuggestionDetails} />
             <Route path="/dashboard/news" component={News} />
             <Route path="/dashboard/admin/suggestions" component={AdminSuggestions} />
-            <Route path="/dashboard/admin/comments" component={AdminSuggestions} />
-            <Route path="/dashboard/admin/news" component={AdminSuggestions} />
+            <Route path="/dashboard/admin/comments" component={AdminComments} />
+            <Route path="/dashboard/admin/news" component={AdminNews} />
             <Route component={NotFound} />
           </Switch>
         </Container>
