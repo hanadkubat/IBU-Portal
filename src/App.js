@@ -8,6 +8,7 @@ import {
 
 import Dashboard from "./app/Dashboard";
 import Login from "./app/Login";
+import Logout from "./app/Logout";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
       </Switch>
     </Router>
   );

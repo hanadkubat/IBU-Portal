@@ -10,6 +10,7 @@
     "moment": "^2.24.0",
     "mui-datatables": "^2.6.3",
     "react": "^16.8.6",
+    "react-adal": "^0.4.24",
     "react-azure-adb2c": "^0.2.0",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
