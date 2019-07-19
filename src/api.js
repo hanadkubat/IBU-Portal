@@ -1,8 +1,4 @@
-import { adalApiFetch } from "./adalConfig";
-
-/*const headers = new Headers();
-const bearer = "Bearer " + localStorage.getItem('adal.idtoken');
-headers.append("Authorization", bearer);*/
+import { adalApiFetch } from "./config/adalConfig";
 
 const BASE_URL = "https://graph.windows.net/hanadkubathotmail.onmicrosoft.com";
 const options = {
@@ -11,11 +7,6 @@ const options = {
     Authorization: "Bearer " + localStorage.getItem("adal.idtoken")
   }
 };
-
-//kenan@hanadkubathotmail.onmicrosoft.com
-//Gobo3786
-//console.log(localStorage.getItem('adal.idtoken'))
-//https://docs.microsoft.com/en-us/previous-versions/azure/ad/graph/howto/azure-ad-graph-api-supported-queries-filters-and-paging-options#CommonQueries
 
 export const signedInUser = {
   getInfo: () => adalApiFetch(

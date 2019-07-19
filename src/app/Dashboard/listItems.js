@@ -9,7 +9,7 @@ import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 
 import { Link } from "react-router-dom";
-import {authContext} from '../../adalConfig';
+import {authContext} from '../../config/adalConfig';
 
 const linkStyle = {
   textDecoration: "none",

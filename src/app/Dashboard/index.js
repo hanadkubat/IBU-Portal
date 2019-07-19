@@ -18,8 +18,6 @@ import { mainListItems, secondaryListItems } from "./listItems";
 
 import { Switch, Route } from "react-router-dom";
 
-import {signedInUser} from '../../api';
-
 //custom components
 import News from "../../Components/News";
 import Suggestions from "../../Components/Suggestions";
