@@ -18,8 +18,7 @@ import { mainListItems, secondaryListItems } from "./listItems";
 
 import { Switch, Route } from "react-router-dom";
 
-//adal api
-import { adalApiFetch } from "../../adalConfig";
+import {signedInUser} from '../../api';
 
 //custom components
 import News from "../../Components/News";
@@ -38,6 +37,7 @@ const logoStyle = {
   maxWidth: "128px",
   maxHeight: "40px"
 };
+
 
 const drawerWidth = 240;
 
@@ -130,23 +130,6 @@ export default function Dashboard() {
     setOpen(false);
   };
 
-  /*const headers = new Headers();
-    const bearer = "Bearer " + localStorage.getItem('adal.idtoken');
-    headers.append("Authorization", bearer);*/
-  const options = {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("adal.idtoken")
-    }
-  };
-  adalApiFetch(fetch, "https://graph.windows.net/hanadkubathotmail.onmicrosoft.com/users/fe1b24e9-c708-4dd0-9367-0986f20b7816/getMemberObjects?api-version=1.6", options)
-    .then(res => res.json())
-    .then(data => console.log(data));
-
-  //kenan@hanadkubathotmail.onmicrosoft.com
-  //Gobo3786
-  //console.log(localStorage.getItem('adal.idtoken'))
-  //https://docs.microsoft.com/en-us/previous-versions/azure/ad/graph/howto/azure-ad-graph-api-supported-queries-filters-and-paging-options#CommonQueries
   return (
     <div className={classes.root}>
       <CssBaseline />
