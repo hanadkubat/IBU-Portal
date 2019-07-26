@@ -32,6 +32,7 @@ class Suggestions extends Component {
 
 
   render() {
+    console.log(this.props.suggestions)
     return (
       <div>
         <NewSuggestionModal
@@ -49,24 +50,21 @@ class Suggestions extends Component {
           </Grid>
         </Grid>
 
-        <Grid item xs={12} md={6} lg={4}>
-          <Grid container justify="center">
-            <Suggestion />
-          </Grid>
-        </Grid>
-
-        <Grid item xs={12} md={6} lg={4}>
-          <Grid container justify="center">
-            <Suggestion />
-          </Grid>
-        </Grid>
-
-        <Grid item xs={12} md={6} lg={4}>
-          <Grid container justify="center">
-            <Suggestion />
-          </Grid>
-        </Grid>
-
+        {
+          this.props.suggestions.map(s => {
+            return (
+              <Grid item xs={12} md={6} lg={4}>
+                <Grid container justify="center">
+                  <Suggestion 
+                    title={s.title}
+                    content={s.content}
+                    userId={s.userId}
+                  />
+                </Grid>
+              </Grid>
+            )
+          })
+        }
 
       </Grid>
       </div>

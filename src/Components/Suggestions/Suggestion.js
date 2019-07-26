@@ -6,7 +6,10 @@ import {withRouter} from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
-    cursor: 'pointer'
+    cursor: 'pointer',
+    width: 'auto !important', /*just to override your inline CSS */
+    left: 0,
+    right: 0,
   }
 }));
 
@@ -17,11 +20,10 @@ function Suggestion(props) {
     <div onClick={() => props.history.push('/dashboard/suggestion/23')}>
       <Paper className={classes.root}>
         <Typography variant="h6" component="h3">
-          This is a sheet of paper.
+          {props.title}
         </Typography>
         <Typography component="p">
-          Paper can be used to build surface or other elements for your
-          application.
+          {props.content}
         </Typography>
         <div className="mt-2">
           <span>
