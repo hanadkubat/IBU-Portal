@@ -1,6 +1,8 @@
 import { adalApiFetch } from "./config/adalConfig";
 
 const BASE_URL = "https://graph.windows.net/hanadkubathotmail.onmicrosoft.com";
+const NODE_API_URL = "http://localhost:8000/api";
+
 const options = {
   method: "GET",
   headers: {
@@ -15,3 +17,11 @@ export const signedInUser = {
     options
   ).then(res => res.json())
 };
+
+export const suggestionsApi = {
+  getAll: () => fetch(`${NODE_API_URL}/suggestion/all`, {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("adal.idtoken")
+    }
+  }).then(res => res.json())
+}

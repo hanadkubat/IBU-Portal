@@ -5,12 +5,20 @@ import AddIcon from "@material-ui/icons/Add";
 import Suggestion from "./Suggestion";
 import NewSuggestionModal from './NewSuggestionModal';
 
-export default class Suggestions extends Component {
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
+import { getAllSuggestions } from '../../actions/suggestion.actions';
+class Suggestions extends Component {
   constructor(props){
     super(props);
     this.state = {
       newModalOpen: false,
     }
+  }
+
+  componentWillMount() {
+    this.props.getAllSuggestions()
   }
 
   //modal handlers
@@ -65,3 +73,19 @@ export default class Suggestions extends Component {
     );
   }
 }
+
+const mapState = (state) => ({
+  suggestions: state.suggestions.suggestions,
+})
+const mapActions = (dispatch) =>
+  bindActionCreators(
+      {
+        getAllSuggestions,
+      },
+      dispatch
+  )
+
+export default connect(
+  mapState,
+  mapActions
+)(Suggestions)
