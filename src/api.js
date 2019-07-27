@@ -11,17 +11,33 @@ const options = {
 };
 
 export const signedInUser = {
-  getInfo: () => adalApiFetch(
-    fetch,
-    `${BASE_URL}/me?api-version=1.6&$select=displayName,objectId,objectType,userType,thumbnailPhoto`,
-    options
-  ).then(res => res.json())
+  getInfo: () =>
+    adalApiFetch(
+      fetch,
+      `${BASE_URL}/me?api-version=1.6&$select=displayName,objectId,objectType,userType,thumbnailPhoto`,
+      options
+    ).then(res => res.json())
+};
+
+//headers for NON AUTH ROUTES
+const headers = {
+  Authorization: "Bearer " + localStorage.getItem("adal.idtoken"),
+  'Content-Type': 'application/json'
 };
 
 export const suggestionsApi = {
-  getAll: () => fetch(`${NODE_API_URL}/suggestion/all`, {
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("adal.idtoken")
-    }
-  }).then(res => res.json())
-}
+  getAll: () =>
+    fetch(`${NODE_API_URL}/suggestion/all`, { headers }).then(res =>
+      res.json()
+    ),
+
+  addSuggestion: (title, content) =>
+    fetch(`${NODE_API_URL}/suggestion/add`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        title,
+        content
+      })
+    }).then(res => res.json())
+};

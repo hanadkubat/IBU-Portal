@@ -8,7 +8,7 @@ import NewSuggestionModal from './NewSuggestionModal';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getAllSuggestions } from '../../actions/suggestion.actions';
+import { getAllSuggestions, addSuggestion } from '../../actions/suggestion.actions';
 class Suggestions extends Component {
   constructor(props){
     super(props);
@@ -32,13 +32,13 @@ class Suggestions extends Component {
 
 
   render() {
-    console.log(this.props.suggestions)
     return (
       <div>
         <NewSuggestionModal
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
           isOpen={this.state.newModalOpen} 
+          addSuggestionHandler={this.props.addSuggestion}
         />
       <Grid container spacing={3} alignItems="center">
 
@@ -79,6 +79,7 @@ const mapActions = (dispatch) =>
   bindActionCreators(
       {
         getAllSuggestions,
+        addSuggestion
       },
       dispatch
   )

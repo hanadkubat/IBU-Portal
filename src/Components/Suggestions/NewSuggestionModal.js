@@ -29,7 +29,7 @@ export default function SimpleModal(props) {
 
   const submitForm = event => {
     event.preventDefault();
-    console.log({ title, multiline });
+    props.addSuggestionHandler(title, multiline)
   };
 
   return (

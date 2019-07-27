@@ -15,3 +15,19 @@ export const getAllSuggestions = () => (dispatch) => {
     function success(suggestions) { return { type: "GET_SUGGESTIONS_SUCCESS", suggestions } }
     function failure(error) { return { type: "GET_SUGGESTIONS_FAILURE", error } }
 }
+
+export const addSuggestion = (title, content) => (dispatch) => {
+    dispatch(request())
+    suggestionsApi.addSuggestion(title, content)
+    .then(data => {
+        dispatch(success(data))
+    })
+    .catch(error => {
+        console.log(error)
+        dispatch(failure(error))
+    })
+    
+    function request() { return { type: "ADD_SUGGESTIONS_REQUEST" } }
+    function success(suggestion) { return { type: "ADD_SUGGESTIONS_SUCCESS", suggestion } }
+    function failure(error) { return { type: "ADD_SUGGESTIONS_FAILURE", error } }
+}
