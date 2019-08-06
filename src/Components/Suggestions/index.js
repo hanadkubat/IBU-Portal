@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { getAllSuggestions, addSuggestion } from '../../actions/suggestion.actions';
+
 class Suggestions extends Component {
   constructor(props){
     super(props);
@@ -52,13 +53,15 @@ class Suggestions extends Component {
 
         {
           this.props.suggestions.map(s => {
+            console.log(s)
             return (
-              <Grid item xs={12} md={6} lg={4}>
+              <Grid item xs={12} md={6} lg={4} key={s._id}>
                 <Grid container justify="center">
                   <Suggestion 
                     title={s.title}
                     content={s.content}
                     userId={s.userId}
+                    id={s._id}
                   />
                 </Grid>
               </Grid>

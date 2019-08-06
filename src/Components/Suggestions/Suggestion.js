@@ -17,7 +17,7 @@ function Suggestion(props) {
   const classes = useStyles();
 
   return (
-    <div onClick={() => props.history.push('/dashboard/suggestion/23')}>
+    <div onClick={() => props.history.push(`/dashboard/suggestion/${props.id}`)}>
       <Paper className={classes.root}>
         <Typography variant="h6" component="h3">
           {props.title}

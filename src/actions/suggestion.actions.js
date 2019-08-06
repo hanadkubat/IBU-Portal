@@ -31,3 +31,20 @@ export const addSuggestion = (title, content) => (dispatch) => {
     function success(suggestion) { return { type: "ADD_SUGGESTIONS_SUCCESS", suggestion } }
     function failure(error) { return { type: "ADD_SUGGESTIONS_FAILURE", error } }
 }
+
+export const approveSuggestion = (id) => (dispatch) => {
+    dispatch(request())
+    suggestionsApi.approveSuggestion(id)
+    .then(data => {
+        dispatch(success())
+    })
+    .catch(error => {
+        console.log(error)
+        dispatch(failure(error))
+    })
+    
+    function request() { return { type: "APPROVE_SUGGESTIONS_REQUEST" } }
+    function success() { return { type: "APPROVE_SUGGESTIONS_SUCCESS", suggestionId: id } }
+    function failure(error) { return { type: "APPROVE_SUGGESTIONS_FAILURE", error } }
+}
+

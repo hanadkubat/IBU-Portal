@@ -33,6 +33,23 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 error: action.error
             }
+        case 'APPROVE_SUGGESTIONS_REQUEST':
+            return {
+                ...state,
+            }
+        case 'APPROVE_SUGGESTIONS_SUCCESS':
+            let sIndex = state.suggestions.findIndex(s => s._id = action.suggestionId)
+            let suggestions = [...state.suggestions]
+            suggestions[sIndex].approved = true
+            return {
+                ...state,
+                suggestions
+            }
+        case 'APPROVE_SUGGESTIONS_FAILURE':
+            return{
+                ...state,
+                error: action.error
+            }
         default:
             return state
     }

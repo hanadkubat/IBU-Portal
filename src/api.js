@@ -39,5 +39,14 @@ export const suggestionsApi = {
         title,
         content
       })
+    }).then(res => res.json()),
+
+    approveSuggestion: (id) => fetch(`${NODE_API_URL}/suggestion/approve`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({
+        suggestionId: id,
+        approved: true
+      })
     }).then(res => res.json())
 };
