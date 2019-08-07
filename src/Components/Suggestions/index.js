@@ -3,34 +3,36 @@ import { Grid, Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 import Suggestion from "./Suggestion";
-import NewSuggestionModal from './NewSuggestionModal';
+import NewSuggestionModal from "./NewSuggestionModal";
 
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import { getAllSuggestions, addSuggestion } from '../../actions/suggestion.actions';
+import {
+  getAllSuggestions,
+  addSuggestion
+} from "../../actions/suggestion.actions";
 
 class Suggestions extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      newModalOpen: false,
-    }
+      newModalOpen: false
+    };
   }
 
   componentWillMount() {
-    this.props.getAllSuggestions()
+    this.props.getAllSuggestions();
   }
 
   //modal handlers
-  handleOpen = (modal) => {
-    this.setState({[modal]: true})
+  handleOpen = modal => {
+    this.setState({ [modal]: true });
   };
 
-  handleClose = (modal) => {
-    this.setState({[modal]: false})
+  handleClose = modal => {
+    this.setState({ [modal]: false });
   };
-
 
   render() {
     return (
@@ -38,26 +40,27 @@ class Suggestions extends Component {
         <NewSuggestionModal
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
-          isOpen={this.state.newModalOpen} 
+          isOpen={this.state.newModalOpen}
           addSuggestionHandler={this.props.addSuggestion}
         />
-      <Grid container spacing={3} alignItems="center">
-
-        <Grid item xs={12} lg={4}>
-          <Grid container justify="center">
-            <Fab color="secondary" aria-label="Add" onClick={() => this.handleOpen('newModalOpen')}>
-              <AddIcon />
-            </Fab>
+        <Grid container spacing={3} alignItems="center">
+          <Grid item xs={12} lg={4}>
+            <Grid container justify="center">
+              <Fab
+                color="secondary"
+                aria-label="Add"
+                onClick={() => this.handleOpen("newModalOpen")}
+              >
+                <AddIcon />
+              </Fab>
+            </Grid>
           </Grid>
-        </Grid>
 
-        {
-          this.props.suggestions.map(s => {
-            console.log(s)
+          {this.props.suggestions.map(s => {
             return (
               <Grid item xs={12} md={6} lg={4} key={s._id}>
                 <Grid container justify="center">
-                  <Suggestion 
+                  <Suggestion
                     title={s.title}
                     content={s.content}
                     userId={s.userId}
@@ -65,29 +68,27 @@ class Suggestions extends Component {
                   />
                 </Grid>
               </Grid>
-            )
-          })
-        }
-
-      </Grid>
+            );
+          })}
+        </Grid>
       </div>
     );
   }
 }
 
-const mapState = (state) => ({
-  suggestions: state.suggestions.suggestions,
-})
-const mapActions = (dispatch) =>
+const mapState = state => ({
+  suggestions: state.suggestions.suggestions
+});
+const mapActions = dispatch =>
   bindActionCreators(
-      {
-        getAllSuggestions,
-        addSuggestion
-      },
-      dispatch
-  )
+    {
+      getAllSuggestions,
+      addSuggestion
+    },
+    dispatch
+  );
 
 export default connect(
   mapState,
   mapActions
-)(Suggestions)
+)(Suggestions);

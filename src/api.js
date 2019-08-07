@@ -22,7 +22,15 @@ export const signedInUser = {
 //headers for NON AUTH ROUTES
 const headers = {
   Authorization: "Bearer " + localStorage.getItem("adal.idtoken"),
-  'Content-Type': 'application/json'
+  "Content-Type": "application/json"
+};
+
+//error handler for fetch API requests
+const handleErrors = response => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
 };
 
 export const suggestionsApi = {
@@ -39,14 +47,30 @@ export const suggestionsApi = {
         title,
         content
       })
-    }).then(res => res.json()),
+    })
+      .then(handleErrors)
+      .then(res => res.json()),
 
-    approveSuggestion: (id) => fetch(`${NODE_API_URL}/suggestion/approve`, {
+  approveSuggestion: id =>
+    fetch(`${NODE_API_URL}/suggestion/approve`, {
       method: "PUT",
       headers,
       body: JSON.stringify({
         suggestionId: id,
         approved: true
       })
-    }).then(res => res.json())
+    })
+      .then(handleErrors)
+      .then(res => res.json()),
+
+  deleteSuggestion: id =>
+    fetch(`${NODE_API_URL}/suggestion/delete`, {
+      method: "DELETE",
+      headers,
+      body: JSON.stringify({
+        suggestionId: id
+      })
+    })
+      .then(handleErrors)
+      .then(res => res.json())
 };

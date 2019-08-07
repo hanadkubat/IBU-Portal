@@ -36,7 +36,7 @@ export const approveSuggestion = (id) => (dispatch) => {
     dispatch(request())
     suggestionsApi.approveSuggestion(id)
     .then(data => {
-        dispatch(success())
+        dispatch(success(id))
     })
     .catch(error => {
         console.log(error)
@@ -44,7 +44,22 @@ export const approveSuggestion = (id) => (dispatch) => {
     })
     
     function request() { return { type: "APPROVE_SUGGESTIONS_REQUEST" } }
-    function success() { return { type: "APPROVE_SUGGESTIONS_SUCCESS", suggestionId: id } }
+    function success(id) { return { type: "APPROVE_SUGGESTIONS_SUCCESS", suggestionId: id } }
     function failure(error) { return { type: "APPROVE_SUGGESTIONS_FAILURE", error } }
 }
 
+export const deleteSuggestion = (id) => (dispatch) => {
+    dispatch(request())
+    suggestionsApi.deleteSuggestion(id)
+    .then(data => {
+        dispatch(success(id))
+    })
+    .catch(error => {
+        console.log(error)
+        dispatch(failure(error))
+    })
+
+    function request() { return { type: "DELETE_SUGGESTIONS_REQUEST" } }
+    function success(id) { return { type: "DELETE_SUGGESTIONS_SUCCESS", suggestionId: id } }
+    function failure(error) { return { type: "DELETE_SUGGESTIONS_FAILURE", error } }
+}
