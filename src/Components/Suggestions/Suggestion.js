@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Paper, makeStyles } from "@material-ui/core";
 import { Comment } from "@material-ui/icons";
 import { withRouter } from "react-router-dom";
+import styles from './Suggestion.module.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,12 +20,14 @@ function Suggestion(props) {
   return (
     <div
       onClick={() => props.history.push(`/dashboard/suggestion/${props.id}`)}
+      //style={{maxWidth: '100%', minWidth:'100%',}}
+      className={styles.wrapper}
     >
       <Paper className={classes.root}>
         <Typography variant="h6" component="h3">
           {props.title}
         </Typography>
-        <Typography component="p">{props.content}</Typography>
+        <Typography component="p" className={styles.no_overflow}>{props.content}</Typography>
         <div className="mt-2">
           <span>
             <Comment /> 55
