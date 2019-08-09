@@ -38,6 +38,10 @@ export const suggestionsApi = {
     fetch(`${NODE_API_URL}/suggestion/all`, { headers }).then(res =>
       res.json()
     ),
+  getOne: suggestionId =>
+    fetch(`${NODE_API_URL}/suggestion/${suggestionId}`, { headers }).then(res =>
+      res.json()
+    ),
 
   addSuggestion: (title, content) =>
     fetch(`${NODE_API_URL}/suggestion/add`, {
