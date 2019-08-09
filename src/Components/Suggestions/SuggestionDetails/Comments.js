@@ -9,6 +9,7 @@ import {
   ListItemAvatar,
   Typography
 } from "@material-ui/core";
+import SuggestionCommentForm from '../SuggestionCommentForm';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Comments() {
+export default function Comments(props) {
   const classes = useStyles();
 
   return (
@@ -30,6 +31,11 @@ export default function Comments() {
         Komentari
       </Typography>
       <Divider variant="inset" component="li" />
+      
+      <SuggestionCommentForm 
+        addComment={props.addComment}
+      />
+
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
           <Avatar

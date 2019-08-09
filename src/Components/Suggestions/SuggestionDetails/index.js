@@ -5,6 +5,7 @@ import moment from "moment";
 import Comments from "./Comments";
 import { suggestionsApi } from "../../../api";
 
+
 const useStyles = theme => ({
   root: {
     padding: theme.spacing(3, 2)
@@ -57,7 +58,9 @@ class SuggestionDetails extends React.Component {
             <Typography component="p" className="mt-4">
               {content}
             </Typography>
-            <Comments />
+            <Comments
+                addComment={this.addComment}
+            />
           </Paper>
         </Grid>
       </Grid>
