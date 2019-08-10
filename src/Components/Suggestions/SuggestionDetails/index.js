@@ -43,29 +43,35 @@ class SuggestionDetails extends React.Component {
   }
 
   addComment = content => {
-    commentsApi.addComment(content, this.state.suggestionId);
+    commentsApi
+      .addComment(content, this.state.suggestionId)
+      .then(comment =>
+        this.setState({ comments: [...this.state.comments, comment] })
+      )
+      .catch(err => console.log(err));
   };
 
   render() {
     const { classes } = this.props;
-    const { title, content, date } = this.state;
-    console.log(this.state);
     return (
       <Grid container spacing={3} justify="center">
         <Grid item xs={12} lg={8}>
           <Paper className={classes.root}>
             <div className={classes.header}>
               <Typography variant="h5" component="h3">
-                {title}
+                {this.state.title}
               </Typography>
               <Typography variant="caption" component="p">
-                {moment(date).format("MMMM Do YYYY, h:mm a")}
+                {moment(this.state.date).format("MMMM Do YYYY, h:mm a")}
               </Typography>
             </div>
             <Typography component="p" className="mt-4">
-              {content}
+              {this.state.content}
             </Typography>
-            <Comments addComment={this.addComment} />
+            <Comments 
+              addComment={this.addComment} 
+              commentsList={this.state.comments}
+            />
           </Paper>
         </Grid>
       </Grid>
