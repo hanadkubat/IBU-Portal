@@ -78,3 +78,17 @@ export const suggestionsApi = {
       .then(handleErrors)
       .then(res => res.json())
 };
+
+export const commentsApi = {
+  addComment: (content, suggestionId) =>
+    fetch(`${NODE_API_URL}/comment/add`, {
+      method: "POST",
+      headers,
+      body: JSON.stringify({
+        content,
+        suggestionId
+      })
+    })
+      .then(handleErrors)
+      .then(res => res.json())
+};

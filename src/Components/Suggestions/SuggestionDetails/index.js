@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import Comments from "./Comments";
 import { suggestionsApi } from "../../../api";
-
+import { commentsApi } from "../../../api";
 
 const useStyles = theme => ({
   root: {
@@ -20,6 +20,7 @@ const useStyles = theme => ({
 
 class SuggestionDetails extends React.Component {
   state = {
+    suggestionId: null,
     title: "",
     content: "",
     date: null,
@@ -27,22 +28,28 @@ class SuggestionDetails extends React.Component {
   };
 
   componentWillMount() {
-    suggestionsApi.getOne(this.props.match.params.id).then(res =>
-      this.setState({
-        title: res.title,
-        content: res.content,
-        date: res.date
+    suggestionsApi
+      .getOne(this.props.match.params.id)
+      .then(res => {
+        this.setState({
+          suggestionId: res._id,
+          title: res.title,
+          content: res.content,
+          date: res.date,
+          comments: res.comments
+        });
       })
-    );
+      .catch(err => console.log(err));
   }
 
-  addComment = (content) => {
-    console.log(content)
-  }
+  addComment = content => {
+    commentsApi.addComment(content, this.state.suggestionId);
+  };
 
   render() {
     const { classes } = this.props;
     const { title, content, date } = this.state;
+    console.log(this.state);
     return (
       <Grid container spacing={3} justify="center">
         <Grid item xs={12} lg={8}>
@@ -58,9 +65,7 @@ class SuggestionDetails extends React.Component {
             <Typography component="p" className="mt-4">
               {content}
             </Typography>
-            <Comments
-                addComment={this.addComment}
-            />
+            <Comments addComment={this.addComment} />
           </Paper>
         </Grid>
       </Grid>

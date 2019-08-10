@@ -12,7 +12,7 @@ export default function SuggestionCommentForm(props) {
 
   const submitForm = event => {
     event.preventDefault();
-    if (content.length < 10) setError("Comment must be at least 10 words long");
+    if (content.length < 10) setError("Comments must be at least 10 words long");
     else {
       props.addComment(content);
       setContent("");
