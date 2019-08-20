@@ -5,6 +5,8 @@ import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { withRouter, Link } from "react-router-dom";
+
 import {
   getAllComments,
   deleteComment
@@ -29,7 +31,9 @@ class AdminComments extends React.Component {
           data={this.props.comments.map(c => {
             return [
               c.userName,
-              c.suggestionId,
+              <Link to={`/dashboard/suggestion/${c.suggestionId}`}>
+                {c.suggestionId}
+              </Link>,
               c.content,
               <Button
                 variant="contained"
@@ -61,7 +65,9 @@ const mapActions = dispatch =>
     dispatch
   );
 
-export default connect(
-  mapState,
-  mapActions
-)(AdminComments);
+export default withRouter(
+  connect(
+    mapState,
+    mapActions
+  )(AdminComments)
+);
