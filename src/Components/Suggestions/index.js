@@ -56,7 +56,7 @@ class Suggestions extends Component {
             </Grid>
           </Grid>
 
-          {this.props.suggestions.map(s => {
+          {this.props.suggestions.filter(s => s.approved).map(s => {
             return (
               <Grid item xs={12} md={6} lg={4} key={s._id}>
                 <Grid container justify="center">
