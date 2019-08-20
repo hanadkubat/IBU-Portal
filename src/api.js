@@ -35,13 +35,14 @@ const handleErrors = response => {
 
 export const suggestionsApi = {
   getAll: () =>
-    fetch(`${NODE_API_URL}/suggestion/all`, { headers }).then(res =>
-      res.json()
-    ),
+    fetch(`${NODE_API_URL}/suggestion/all`, { headers })
+      .then(handleErrors)
+      .then(res => res.json()),
+      
   getOne: suggestionId =>
-    fetch(`${NODE_API_URL}/suggestion/${suggestionId}`, { headers }).then(res =>
-      res.json()
-    ),
+    fetch(`${NODE_API_URL}/suggestion/${suggestionId}`, { headers })
+      .then(handleErrors)
+      .then(res => res.json()),
 
   addSuggestion: (title, content) =>
     fetch(`${NODE_API_URL}/suggestion/add`, {
@@ -90,5 +91,21 @@ export const commentsApi = {
       })
     })
       .then(handleErrors)
-      .then(res => res.json())
+      .then(res => res.json()),
+
+  getAll: () =>
+    fetch(`${NODE_API_URL}/comment/all`, { headers })
+      .then(handleErrors)
+      .then(res => res.json()),
+     
+  deleteComment: id =>
+      fetch(`${NODE_API_URL}/comment/delete`, {
+        method: "DELETE",
+        headers,
+        body: JSON.stringify({
+          commentId: id
+        })
+      })
+        .then(handleErrors)
+        .then(res => res.json())
 };

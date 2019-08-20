@@ -2,38 +2,66 @@ import React from "react";
 import MUIDataTable from "mui-datatables";
 import { Button } from "@material-ui/core";
 
-const columns = ["Ime", "Naslov", "Komentar", "Prihvati", "Odbiji"];
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const data = [
-  { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-  { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-  { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-  { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
-  { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-];
+import {
+  getAllComments,
+  deleteComment
+} from "../../../actions/comment.actions";
 
+const columns = ["User", "Suggestion ID", "Comment", "Delete"];
 const options = {
   filterType: "checkbox",
-  responsive: 'scroll'
+  responsive: "scroll"
 };
 
-export default function AdminComments() {
-  return (
-    <div>
-      <MUIDataTable
-        title={"Komentari"}
-        data={data.map(item => {
-          return [
-            item.name,
-            item.company,
-            item.city,
-            <Button variant="contained" color="primary" key={item}>Odobri</Button>,
-            <Button variant="contained" color="secondary" key={item}>Zabrani</Button>
-          ];
-        })}
-        columns={columns}
-        options={options}
-      />
-    </div>
-  );
+class AdminComments extends React.Component {
+  componentWillMount() {
+    this.props.getAllComments();
+  }
+
+  render() {
+    return (
+      <div>
+        <MUIDataTable
+          title={"Komentari"}
+          data={this.props.comments.map(c => {
+            return [
+              c.userName,
+              c.suggestionId,
+              c.content,
+              <Button
+                variant="contained"
+                color="secondary"
+                key={c._id}
+                onClick={() => this.props.deleteComment(c._id)}
+              >
+                Delete
+              </Button>
+            ];
+          })}
+          columns={columns}
+          options={options}
+        />
+      </div>
+    );
+  }
 }
+
+const mapState = state => ({
+  comments: state.comments.comments
+});
+const mapActions = dispatch =>
+  bindActionCreators(
+    {
+      getAllComments,
+      deleteComment
+    },
+    dispatch
+  );
+
+export default connect(
+  mapState,
+  mapActions
+)(AdminComments);
