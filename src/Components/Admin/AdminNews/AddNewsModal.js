@@ -26,10 +26,11 @@ export default function SimpleModal(props) {
 
   const [title, setTitle] = useState("");
   const [multiline, setMultiline] = useState("");
+  const [image, setImage] = useState(null)
 
   const submitForm = event => {
     event.preventDefault();
-    console.log(title, multiline);
+    console.log(title, multiline, image);
   };
 
   return (
@@ -65,6 +66,20 @@ export default function SimpleModal(props) {
             helperText="enter news content"
             variant="outlined"
           />
+          <Button
+            variant="contained"
+            component="label"
+            className="my-2"
+            color="primary"
+          >
+            Upload Headline Image
+            <input
+              accept="image/*"
+              type="file"
+              style={{ display: "none" }}
+              onChange={e => setImage(e.target.value)}
+            />
+          </Button>
           <div className="mt-2 d-flex flex-wrap">
             <Button
               type="submit"
