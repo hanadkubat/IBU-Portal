@@ -16,7 +16,12 @@ export const signedInUser = {
       fetch,
       `${BASE_URL}/me?api-version=1.6&$select=displayName,objectId,objectType,userType,thumbnailPhoto`,
       options
-    ).then(res => res.json())
+    ).then(res => res.json()),
+
+  getUserPhoto: (userId) =>
+    adalApiFetch(fetch, `https://graph.microsoft.com/v1.0/me/photo/$value`, options).then(res =>
+      res.json()
+    )
 };
 
 //headers for NON AUTH ROUTES
@@ -38,7 +43,7 @@ export const suggestionsApi = {
     fetch(`${NODE_API_URL}/suggestion/all`, { headers })
       .then(handleErrors)
       .then(res => res.json()),
-      
+
   getOne: suggestionId =>
     fetch(`${NODE_API_URL}/suggestion/${suggestionId}`, { headers })
       .then(handleErrors)
@@ -97,15 +102,15 @@ export const commentsApi = {
     fetch(`${NODE_API_URL}/comment/all`, { headers })
       .then(handleErrors)
       .then(res => res.json()),
-     
+
   deleteComment: id =>
-      fetch(`${NODE_API_URL}/comment/delete`, {
-        method: "DELETE",
-        headers,
-        body: JSON.stringify({
-          commentId: id
-        })
+    fetch(`${NODE_API_URL}/comment/delete`, {
+      method: "DELETE",
+      headers,
+      body: JSON.stringify({
+        commentId: id
       })
-        .then(handleErrors)
-        .then(res => res.json())
+    })
+      .then(handleErrors)
+      .then(res => res.json())
 };
