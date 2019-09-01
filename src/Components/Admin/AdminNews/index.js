@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import MUIDataTable from "mui-datatables";
 import { Button, Grid, Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 import AddNewsModal from "./AddNewsModal";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { getAllNews, addNews, deleteNews } from "../../../actions/news.actions";
 
 const columns = ["Naslov", "Sadrzaj", "Izmijeni", "Obrisi"];
 
@@ -20,52 +25,74 @@ const options = {
   responsive: "scroll"
 };
 
-export default function AdminNews() {
-  const [modalOpen, setModalOpen] = useState(false);
+class AdminNews extends React.Component {
+  state = {
+    modalOpen: false
+  };
 
   //modal handlers
-  const handleOpen = () => {
-    setModalOpen(true);
+  handleOpen = () => {
+    this.setState({ modalOpen: true });
   };
 
-  const handleClose = () => {
-    setModalOpen(false);
+  handleClose = () => {
+    this.setState({ modalOpen: false });
   };
 
-  return (
-    <div>
-      <AddNewsModal
-        handleOpen={handleOpen}
-        handleClose={handleClose}
-        isOpen={modalOpen}
-      />
-      <Grid container spacing={1} alignItems="center">
-        <Grid item xs={12} lg={2}>
-          <Fab color="secondary" aria-label="Add" onClick={handleOpen}>
-            <AddIcon />
-          </Fab>
-        </Grid>
+  render() {
+    return (
+      <div>
+        <AddNewsModal
+          handleOpen={this.handleOpen}
+          handleClose={this.handleClose}
+          isOpen={this.state.modalOpen}
+        />
+        <Grid container spacing={1} alignItems="center">
+          <Grid item xs={12} lg={2}>
+            <Fab color="secondary" aria-label="Add" onClick={this.handleOpen}>
+              <AddIcon />
+            </Fab>
+          </Grid>
 
-        <Grid item xs={12} lg={10}>
-          <MUIDataTable
-            title={"Novosti"}
-            data={data.map(item => {
-              return [
-                item.name,
-                item.company,
-                <Button variant="contained" color="primary" key={item}>
-                  Izmijeni
-                </Button>,
-                <Button variant="contained" color="secondary" key={item}>
-                  Obrisi
-                </Button>
-              ];
-            })}
-            columns={columns}
-            options={options}
-          />
+          <Grid item xs={12} lg={10}>
+            <MUIDataTable
+              title={"Novosti"}
+              data={data.map(item => {
+                return [
+                  item.name,
+                  item.company,
+                  <Button variant="contained" color="primary" key={item}>
+                    Izmijeni
+                  </Button>,
+                  <Button variant="contained" color="secondary" key={item}>
+                    Obrisi
+                  </Button>
+                ];
+              })}
+              columns={columns}
+              options={options}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }
+
+const mapState = state => ({
+  news: state.news.news
+});
+const mapActions = dispatch =>
+  bindActionCreators(
+    {
+      addNews,
+      getAllNews,
+      deleteNews
+    },
+    dispatch
+  );
+
+export default connect(
+  mapState,
+  mapActions
+)(AdminNews);

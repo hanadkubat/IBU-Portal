@@ -114,3 +114,34 @@ export const commentsApi = {
       .then(handleErrors)
       .then(res => res.json())
 };
+
+export const newsApi = {
+  addNews: (title, content, img) =>
+    fetch(`${NODE_API_URL}/news/add`, {
+      method: "POST",
+      headers: {...headers, 'Content-Type': 'multipart/form-data'},
+      body: JSON.stringify({
+        title,
+        content,
+        headImage: img
+      })
+    })
+      .then(handleErrors)
+      .then(res => res.json()),
+
+  getAll: () =>
+    fetch(`${NODE_API_URL}/news/all`, { headers })
+      .then(handleErrors)
+      .then(res => res.json()),
+
+  deleteNews: id =>
+    fetch(`${NODE_API_URL}/news/delete`, {
+      method: "DELETE",
+      headers,
+      body: JSON.stringify({
+        newsId: id
+      })
+    })
+      .then(handleErrors)
+      .then(res => res.json())
+};

@@ -24,9 +24,9 @@ export default function reducer(state = initialState, action) {
         ...state
       };
     case "DELETE_COMMENT_SUCCESS": {
-      let sIndex = state.comments.findIndex(s => s._id === action.commentId);
+      let cIndex = state.comments.findIndex(c => c._id === action.commentId);
       let comments = [...state.comments];
-      comments.splice(sIndex, 1);
+      comments.splice(cIndex, 1);
       return {
         ...state,
         comments
