@@ -9,6 +9,8 @@ import {
   Typography
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
+import moment from 'moment';
+import styles from './News.module.css';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -23,19 +25,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard(props) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card className={ [classes.card, styles.wrapper].join(' ')} >
       <CardHeader
         avatar={
           <Avatar aria-label="Recipe" className={classes.avatar}>
-            R
+            {props.user[0].toUpperCase()}
           </Avatar>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={props.user}
+        subheader={moment(props.date).format('MMMM Do, YYYY')}
       />
       <CardMedia
         className={classes.media}
@@ -43,10 +45,8 @@ export default function RecipeReviewCard() {
         title="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+        <Typography variant="body2" color="textSecondary" component="p" className="w-100">
+          {props.title}
         </Typography>
       </CardContent>
     </Card>

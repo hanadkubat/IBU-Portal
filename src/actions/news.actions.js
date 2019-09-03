@@ -32,9 +32,9 @@ export const deleteNews = (id) => (dispatch) => {
     function failure(error) { return { type: "DELETE_NEWS_FAILURE", error } }
 }
 
-export const addNews = (title, content, img) => (dispatch) => {
+export const addNews = (formData) => (dispatch) => {
     dispatch(request())
-    newsApi.addNews(title, content, img)
+    newsApi.addNews(formData)
     .then(data => {
         dispatch(success(data))
     })

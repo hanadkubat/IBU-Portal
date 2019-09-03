@@ -10,16 +10,7 @@ import { bindActionCreators } from "redux";
 
 import { getAllNews, addNews, deleteNews } from "../../../actions/news.actions";
 
-const columns = ["Naslov", "Sadrzaj", "Izmijeni", "Obrisi"];
-
-const data = [
-  { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-  { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-  { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-  { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
-  { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" }
-];
-
+const columns = ["User", "Title", "Date", "Delete"];
 const options = {
   filterType: "checkbox",
   responsive: "scroll"
@@ -29,6 +20,10 @@ class AdminNews extends React.Component {
   state = {
     modalOpen: false
   };
+
+  componentWillMount(){
+    this.props.getAllNews();
+  }
 
   //modal handlers
   handleOpen = () => {
@@ -46,6 +41,7 @@ class AdminNews extends React.Component {
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
           isOpen={this.state.modalOpen}
+          addNews={this.props.addNews}
         />
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={12} lg={2}>
@@ -57,15 +53,18 @@ class AdminNews extends React.Component {
           <Grid item xs={12} lg={10}>
             <MUIDataTable
               title={"Novosti"}
-              data={data.map(item => {
+              data={this.props.news.map(item => {
                 return [
-                  item.name,
-                  item.company,
-                  <Button variant="contained" color="primary" key={item}>
-                    Izmijeni
-                  </Button>,
-                  <Button variant="contained" color="secondary" key={item}>
-                    Obrisi
+                  item.userName,
+                  item.title,
+                  item.date,
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => this.props.deleteNews(item._id)}
+                    key={item._id}
+                  >
+                    Delete
                   </Button>
                 ];
               })}

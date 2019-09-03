@@ -30,7 +30,12 @@ export default function SimpleModal(props) {
 
   const submitForm = event => {
     event.preventDefault();
-    console.log(title, multiline, image);
+    let formData = new FormData(event.target);
+    /*formData.append("title", title);
+    formData.append("content", multiline);  
+    formData.append("headImage", image);*/
+    props.addNews(formData);
+    console.log(event.target)
   };
 
   return (
@@ -43,11 +48,12 @@ export default function SimpleModal(props) {
         <h4 id="modal-title" className="text-center">
           Add News Article
         </h4>
-        <form onSubmit={submitForm} className={classes.form}>
+        <form onSubmit={submitForm} className={classes.form} encType="multipart/form-data">
           <TextField
             required
             id="outlined-required"
             label="Title"
+            name="title"
             value={title}
             onChange={e => setTitle(e.target.value)}
             className={classes.textField}
@@ -58,6 +64,7 @@ export default function SimpleModal(props) {
           <TextField
             id="outlined-multiline-flexible"
             label="Content"
+            name="content"
             multiline
             required
             value={multiline}
@@ -74,10 +81,11 @@ export default function SimpleModal(props) {
           >
             Upload Headline Image
             <input
+              name="headImage"
               accept="image/*"
               type="file"
               style={{ display: "none" }}
-              onChange={e => setImage(e.target.value)}
+              onChange={e => setImage(e.target.files[0])}
             />
           </Button>
           <div className="mt-2 d-flex flex-wrap">
