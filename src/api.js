@@ -2,6 +2,7 @@ import { adalApiFetch } from "./config/adalConfig";
 
 const BASE_URL = "https://graph.windows.net/hanadkubathotmail.onmicrosoft.com";
 const NODE_API_URL = "http://localhost:8000/api";
+const NODE_STATIC_URL = "http://localhost:8000/uploads";
 
 const options = {
   method: "GET",
@@ -36,6 +37,15 @@ const handleErrors = response => {
     throw Error(response.statusText);
   }
   return response;
+};
+
+export const staticFiles = {
+  getImage: filename =>
+    fetch(`${NODE_STATIC_URL}/${filename}`, {
+      headers: { Authorization: headers.Authorization },
+    })
+      .then(handleErrors)
+      .then(res => res.blob())
 };
 
 export const suggestionsApi = {
