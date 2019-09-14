@@ -20,7 +20,6 @@ function Suggestion(props) {
   return (
     <div
       onClick={() => props.history.push(`/dashboard/suggestion/${props.id}`)}
-      //style={{maxWidth: '100%', minWidth:'100%',}}
       className={styles.wrapper}
     >
       <Paper className={classes.root}>
@@ -30,7 +29,7 @@ function Suggestion(props) {
         <Typography component="p" className={styles.no_overflow}>{props.content}</Typography>
         <div className="mt-2">
           <span>
-            <Comment /> 55
+            <Comment />
           </span>
         </div>
       </Paper>

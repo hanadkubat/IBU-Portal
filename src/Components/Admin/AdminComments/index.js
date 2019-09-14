@@ -27,7 +27,7 @@ class AdminComments extends React.Component {
     return (
       <div>
         <MUIDataTable
-          title={"Komentari"}
+          title={"Comments"}
           data={this.props.comments.map(c => {
             return [
               c.userName,

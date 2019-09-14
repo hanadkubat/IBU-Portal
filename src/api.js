@@ -55,7 +55,7 @@ export const suggestionsApi = {
       .then(res => res.json()),
 
   getOne: suggestionId =>
-    fetch(`${NODE_API_URL}/suggestion/${suggestionId}`, { headers })
+    fetch(`${NODE_API_URL}/suggestion/one/${suggestionId}`, { headers })
       .then(handleErrors)
       .then(res => res.json()),
 
@@ -137,6 +137,11 @@ export const newsApi = {
 
   getAll: () =>
     fetch(`${NODE_API_URL}/news/all`, { headers })
+      .then(handleErrors)
+      .then(res => res.json()),
+
+  getOne: newsId =>
+    fetch(`${NODE_API_URL}/news/article/${newsId}`, { headers })
       .then(handleErrors)
       .then(res => res.json()),
 

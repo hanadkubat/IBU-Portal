@@ -26,6 +26,7 @@ class News extends Component {
                         user={n.userName}
                         date={n.date}
                         title={n.title}
+                        id={n._id}
                     />
                   </Grid>
                 </Grid>

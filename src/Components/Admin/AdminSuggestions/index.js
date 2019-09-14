@@ -5,6 +5,8 @@ import { Button } from "@material-ui/core";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { withRouter, Link } from "react-router-dom";
+
 import {
   getAllSuggestions,
   approveSuggestion,
@@ -29,18 +31,21 @@ class AdminSuggestions extends React.Component {
     filterType: "checkbox",
     responsive: "scroll"
   };
-  columns = ["Ime", "Naslov", "Sadrzaj", "Prihvati", "Obrisi"];
+  columns = ["User", "Title", "Content", "ID", "Approve", "Delete"];
 
   render() {
     return (
       <div>
         <MUIDataTable
-          title={"Korisnicki prijedlozi"}
+          title={"User Suggestions"}
           data={this.props.suggestions.map(item => {
             return [
               item.userName,
               item.title,
               item.content,
+              <Link to={`/dashboard/suggestion/${item._id}`}>
+                {item._id}
+              </Link>,
               <Button
                 variant="contained"
                 color="primary"
@@ -48,7 +53,7 @@ class AdminSuggestions extends React.Component {
                 key={item}
                 onClick={() => this.approveSuggestion(item._id)}
               >
-                Odobri
+                Approve
               </Button>,
               <Button
                 variant="contained"
@@ -56,7 +61,7 @@ class AdminSuggestions extends React.Component {
                 key={item}
                 onClick={() => this.deleteSuggestion(item._id)}
               >
-                Obrisi
+                Delete
               </Button>
             ];
           })}
@@ -81,7 +86,7 @@ const mapActions = dispatch =>
     dispatch
   );
 
-export default connect(
+export default withRouter(connect(
   mapState,
   mapActions
-)(AdminSuggestions);
+)(AdminSuggestions));

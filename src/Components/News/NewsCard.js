@@ -10,13 +10,14 @@ import {
 } from "@material-ui/core";
 import { red } from "@material-ui/core/colors";
 import moment from "moment";
+import { withRouter } from "react-router-dom";
 import styles from "./News.module.css";
-
 import { staticFiles } from "../../api";
 
 const Styles = theme => ({
   card: {
-    maxWidth: "100%"
+    maxWidth: "100%",
+    cursor: "pointer"
   },
   media: {
     height: 0,
@@ -40,10 +41,15 @@ class NewsCard extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Card className={[classes.card, styles.wrapper].join(" ")}>
+      <Card
+        className={[classes.card, styles.wrapper].join(" ")}
+        onClick={() =>
+          this.props.history.push(`/dashboard/news/article/${this.props.id}`)
+        }
+      >
         <CardHeader
           avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
+            <Avatar aria-label="User" className={classes.avatar}>
               {this.props.user[0].toUpperCase()}
             </Avatar>
           }
@@ -53,7 +59,7 @@ class NewsCard extends React.Component {
         <CardMedia
           className={classes.media}
           image={this.state.imageUrl}
-          title="Paella dish"
+          title="Article image"
         />
         <CardContent>
           <Typography
@@ -70,4 +76,4 @@ class NewsCard extends React.Component {
   }
 }
 
-export default withStyles(Styles)(NewsCard);
+export default withRouter(withStyles(Styles)(NewsCard));

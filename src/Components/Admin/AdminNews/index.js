@@ -7,10 +7,14 @@ import AddNewsModal from "./AddNewsModal";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { withRouter, Link } from "react-router-dom";
+import moment from 'moment';
 
 import { getAllNews, addNews, deleteNews } from "../../../actions/news.actions";
 
-const columns = ["User", "Title", "Date", "Delete"];
+
+
+const columns = ["User", "Title", "ID", "Date", "Delete"];
 const options = {
   filterType: "checkbox",
   responsive: "scroll"
@@ -45,19 +49,22 @@ class AdminNews extends React.Component {
         />
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={12} lg={2}>
-            <Fab color="secondary" aria-label="Add" onClick={this.handleOpen}>
+            <Fab color="primary" aria-label="Add" onClick={this.handleOpen}>
               <AddIcon />
             </Fab>
           </Grid>
 
           <Grid item xs={12} lg={10}>
             <MUIDataTable
-              title={"Novosti"}
+              title={"News"}
               data={this.props.news.map(item => {
                 return [
                   item.userName,
                   item.title,
-                  item.date,
+                  <Link to={`/dashboard/news/article/${item._id}`}>
+                    {item._id}
+                  </Link>,
+                  moment(item.date).format("MMM Do YY, h:mm:ss a"),
                   <Button
                     variant="contained"
                     color="secondary"
@@ -91,7 +98,7 @@ const mapActions = dispatch =>
     dispatch
   );
 
-export default connect(
+export default withRouter(connect(
   mapState,
   mapActions
-)(AdminNews);
+)(AdminNews));

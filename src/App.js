@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 
 import Dashboard from "./app/Dashboard";
-import Login from "./app/Login";
 import Logout from "./app/Logout";
 
 import { Provider } from "react-redux";
@@ -20,7 +19,6 @@ function App() {
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/login" component={Login} />
           <Route path="/logout" component={Logout} />
         </Switch>
       </Router>

@@ -25,7 +25,7 @@ export default function Comments(props) {
   return (
     <List className={classes.root}>
       <Typography variant="overline" component="h3">
-        Komentari
+        Comments section
       </Typography>
       <Divider variant="inset" component="li" />
       

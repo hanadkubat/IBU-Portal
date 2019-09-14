@@ -20,6 +20,7 @@ import { Switch, Route } from "react-router-dom";
 
 //custom components
 import News from "../../Components/News";
+import NewsDetails from "../../Components/News/NewsDetails";
 import Suggestions from "../../Components/Suggestions";
 import SuggestionDetails from "../../Components/Suggestions/SuggestionDetails";
 import NotFound from "../../Components/NotFound";
@@ -30,7 +31,7 @@ import AdminComments from "../../Components/Admin/AdminComments";
 import AdminNews from "../../Components/Admin/AdminNews";
 
 //logo
-import logo from "../../assets/mibo.png";
+import logo from "../../assets/IBU_logo.png";
 const logoStyle = {
   maxWidth: "128px",
   maxHeight: "40px"
@@ -132,7 +133,7 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        color="secondary"
+        color="primary"
         position="absolute"
         className={clsx(classes.appBar, open && classes.appBarShift)}
       >
@@ -182,16 +183,10 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Switch>
             <Route exact path="/dashboard" component={Suggestions} />
-            <Route
-              exact
-              path="/dashboard/suggestion/:id"
-              component={SuggestionDetails}
-            />
-            <Route path="/dashboard/news" component={News} />
-            <Route
-              path="/dashboard/admin/suggestions"
-              component={AdminSuggestions}
-            />
+            <Route exact path="/dashboard/news" component={News} />
+            <Route exact path="/dashboard/suggestion/:id" component={SuggestionDetails} />
+            <Route exact path="/dashboard/news/article/:id" component={NewsDetails} />
+            <Route path="/dashboard/admin/suggestions" component={AdminSuggestions} />
             <Route path="/dashboard/admin/comments" component={AdminComments} />
             <Route path="/dashboard/admin/news" component={AdminNews} />
             <Route component={NotFound} />

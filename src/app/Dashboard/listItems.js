@@ -23,7 +23,7 @@ export const mainListItems = (
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>
-        <ListItemText primary="Prijedlozi" />
+        <ListItemText primary="Suggestions" />
       </ListItem>
     </Link>
     <Link to="/dashboard/news" style={linkStyle}>
@@ -31,28 +31,28 @@ export const mainListItems = (
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary="Novosti" />
+        <ListItemText primary="News" />
       </ListItem>
     </Link>
       <ListItem button onClick={() => authContext.logOut()}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
-        <ListItemText primary="Odjava korisnika" />
+        <ListItemText primary="Sign Out" />
       </ListItem>
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Administracija</ListSubheader>
+    <ListSubheader inset>Administration</ListSubheader>
 
     <Link to="/dashboard/admin/suggestions" style={linkStyle}>
       <ListItem button>
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
-        <ListItemText primary="Korisnicki prijedlozi" />
+        <ListItemText primary="User Suggestions" />
       </ListItem>
     </Link>
 
@@ -61,7 +61,7 @@ export const secondaryListItems = (
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
-        <ListItemText primary="Komentari" />
+        <ListItemText primary="User Comments" />
       </ListItem>
     </Link>
 
@@ -70,7 +70,7 @@ export const secondaryListItems = (
         <ListItemIcon>
           <AssignmentIcon />
         </ListItemIcon>
-        <ListItemText primary="Novosti" />
+        <ListItemText primary="News Articles" />
       </ListItem>
     </Link>
   </div>

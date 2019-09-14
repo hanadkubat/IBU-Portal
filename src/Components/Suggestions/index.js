@@ -47,7 +47,7 @@ class Suggestions extends Component {
           <Grid item xs={12} lg={4}>
             <Grid container justify="center">
               <Fab
-                color="secondary"
+                color="primary"
                 aria-label="Add"
                 onClick={() => this.handleOpen("newModalOpen")}
               >
