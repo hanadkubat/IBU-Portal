@@ -51,6 +51,38 @@ class SuggestionDetails extends React.Component {
       .catch(err => console.log(err));
   };
 
+  updateComment = (commentId, content) => {
+    commentsApi
+      .updateOne(commentId, content)
+      .then(comment => {
+        this.updateCommentsState(commentId, content);
+      })
+      .catch(err => console.log(err));
+  };
+
+  deleteComment = commentId => {
+    commentsApi
+      .deleteComment(commentId)
+      .then(data => {
+        console.log(data);
+        this.updateCommentsState(commentId);
+      })
+      .catch(err => console.log(err));
+  };
+
+  updateCommentsState = (commentId, content) => {
+    /*
+    Update comment content in state or remove comment from state 
+    if content param isn't provided
+    */
+
+    const comments = [...this.state.comments];
+    const index = comments.findIndex(c => c._id === commentId);
+    if (content) comments[index].content = content;
+    else comments.splice(index, 1);
+    this.setState({ comments });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -68,8 +100,10 @@ class SuggestionDetails extends React.Component {
             <Typography component="p" className="mt-4">
               {this.state.content}
             </Typography>
-            <Comments 
-              addComment={this.addComment} 
+            <Comments
+              addComment={this.addComment}
+              updateComment={this.updateComment}
+              deleteComment={this.deleteComment}
               commentsList={this.state.comments}
             />
           </Paper>

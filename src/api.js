@@ -1,26 +1,26 @@
 import { adalApiFetch } from "./config/adalConfig";
+import { toast } from "react-toastify";
 
 const BASE_URL = "https://graph.windows.net/hanadkubathotmail.onmicrosoft.com";
 const NODE_API_URL = "http://localhost:8000/api";
 const NODE_STATIC_URL = "http://localhost:8000/uploads";
 
-const options = {
-  method: "GET",
-  headers: {
-    Authorization: "Bearer " + localStorage.getItem("adal.idtoken")
-  }
-};
-
 export const signedInUser = {
+  options: {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("adal.idtoken")
+    }
+  },
   getInfo: () =>
     adalApiFetch(
       fetch,
       `${BASE_URL}/me?api-version=1.6&$select=displayName,objectId,objectType,userType,thumbnailPhoto`,
-      options
+      signedInUser.options
     ).then(res => res.json()),
 
   getUserPhoto: (userId) =>
-    adalApiFetch(fetch, `https://graph.microsoft.com/v1.0/me/photo/$value`, options).then(res =>
+    adalApiFetch(fetch, `https://graph.microsoft.com/v1.0/me/photo/$value`, signedInUser.options).then(res =>
       res.json()
     )
 };
@@ -34,6 +34,7 @@ const headers = {
 //error handler for fetch API requests
 const handleErrors = response => {
   if (!response.ok) {
+    toast.error('Error occured!')
     throw Error(response.statusText);
   }
   return response;
@@ -106,7 +107,10 @@ export const commentsApi = {
       })
     })
       .then(handleErrors)
-      .then(res => res.json()),
+      .then(res => {
+        toast.success('Added comment successfuly');
+        res.json(); 
+      }),
 
   getAll: () =>
     fetch(`${NODE_API_URL}/comment/all`, { headers })
@@ -122,7 +126,25 @@ export const commentsApi = {
       })
     })
       .then(handleErrors)
-      .then(res => res.json())
+      .then(res => {
+        toast.success('Comment deleted successfuly');
+        res.json(); 
+      }),
+
+  updateOne: (id, newContent) =>
+    fetch(`${NODE_API_URL}/comment/updateOne`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({
+        content: newContent,
+        commentId: id
+      })
+    })
+      .then(handleErrors)
+      .then(res => {
+        toast.success('Comment updated successfuly');
+        res.json(); 
+      }),
 };
 
 export const newsApi = {

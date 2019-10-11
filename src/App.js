@@ -12,6 +12,10 @@ import Logout from "./app/Logout";
 import { Provider } from "react-redux";
 import store from "./store";
 
+//react-toast
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {  
   return (
     <Provider store={store}>
@@ -22,6 +26,7 @@ function App() {
           <Route path="/logout" component={Logout} />
         </Switch>
       </Router>
+      <ToastContainer autoClose={2000} />
     </Provider>
   );
 }

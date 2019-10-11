@@ -48,10 +48,13 @@ class AdminNews extends React.Component {
           addNews={this.props.addNews}
         />
         <Grid container spacing={1} alignItems="center">
+
           <Grid item xs={12} lg={2}>
+            <Grid container justify="center">
             <Fab color="primary" aria-label="Add" onClick={this.handleOpen}>
               <AddIcon />
             </Fab>
+            </Grid>
           </Grid>
 
           <Grid item xs={12} lg={10}>

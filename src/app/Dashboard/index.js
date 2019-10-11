@@ -32,6 +32,8 @@ import AdminNews from "../../Components/Admin/AdminNews";
 
 //logo
 import logo from "../../assets/IBU_logo.png";
+import bgImage from "../../assets/about_burch1.jpg";
+
 const logoStyle = {
   maxWidth: "128px",
   maxHeight: "40px"
@@ -42,7 +44,12 @@ const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    backgroundImage: `url("${bgImage}")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
+    backgroundPosition: 'center'
   },
   toolbar: {
     paddingRight: 24 // keep right padding when drawer closed
@@ -102,11 +109,14 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     height: "100vh",
-    overflow: "auto"
+    overflow: "auto",
+    backdropFilter: 'blur(6px)'
+    
   },
   container: {
     paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4)
+    paddingBottom: theme.spacing(4),
+    
   },
   paper: {
     padding: theme.spacing(2),

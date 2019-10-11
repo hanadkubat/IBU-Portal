@@ -34,13 +34,16 @@ export default function Comments(props) {
       />
 
       {
-        props.commentsList.reverse().map(c => {
+        props.commentsList.map(c => {
           return (
             <Comment 
               content={c.content}
+              commentId={c._id}
               userName={c.userName}
               userId={c.userId}
               date={c.date}
+              updateComment={props.updateComment}
+              deleteComment={() => props.deleteComment(c._id) }
             />
           )
         })
