@@ -10,7 +10,6 @@ import { red } from "@material-ui/core/colors";
 import CloseIcon from '@material-ui/icons/Close';
 import CreateIcon from '@material-ui/icons/Create';
 import TextField from '@material-ui/core/TextField';
-
 import {checkIfCurrentUser} from '../../../config/adalConfig';
 
 export default function Comment(props) {

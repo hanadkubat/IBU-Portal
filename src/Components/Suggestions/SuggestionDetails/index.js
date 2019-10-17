@@ -1,10 +1,11 @@
 import React from "react";
-import { Grid, Paper, Typography } from "@material-ui/core";
+import { Grid, Paper, Typography, TextField } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import CreateIcon from '@material-ui/icons/Create';
 import moment from "moment";
 import Comments from "./Comments";
-import { suggestionsApi } from "../../../api";
-import { commentsApi } from "../../../api";
+import { suggestionsApi, commentsApi  } from "../../../api";
+import {checkIfCurrentUser} from '../../../config/adalConfig';
 
 const useStyles = theme => ({
   root: {
@@ -20,11 +21,14 @@ const useStyles = theme => ({
 
 class SuggestionDetails extends React.Component {
   state = {
+    userId: null,
     suggestionId: null,
     title: "",
     content: "",
     date: null,
-    comments: []
+    comments: [],
+    isEditingTitle: false,
+    isCurrentUser: false
   };
 
   componentWillMount() {
@@ -32,11 +36,13 @@ class SuggestionDetails extends React.Component {
       .getOne(this.props.match.params.id)
       .then(res => {
         this.setState({
+          userId: res.userId,
           suggestionId: res._id,
           title: res.title,
           content: res.content,
           date: res.date,
-          comments: res.comments
+          comments: res.comments,
+          isCurrentUser: checkIfCurrentUser(res.userId)
         });
       })
       .catch(err => console.log(err));
@@ -75,13 +81,24 @@ class SuggestionDetails extends React.Component {
     Update comment content in state or remove comment from state 
     if content param isn't provided
     */
-
     const comments = [...this.state.comments];
     const index = comments.findIndex(c => c._id === commentId);
     if (content) comments[index].content = content;
     else comments.splice(index, 1);
     this.setState({ comments });
   };
+
+  saveTitleEdit = e => {
+    const newTitle = e.target.value;
+    if(e.keyCode === 13){
+      console.log('save title edit', newTitle)
+      suggestionsApi.updateSuggestion(this.state.suggestionId, {title: newTitle})
+        .then(data => {
+          console.log(data)
+          this.setState({isEditingTitle: false, title: newTitle})
+        })
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -91,7 +108,30 @@ class SuggestionDetails extends React.Component {
           <Paper className={classes.root}>
             <div className={classes.header}>
               <Typography variant="h5" component="h3">
-                {this.state.title}
+                {
+                  this.state.isEditingTitle ?
+                  <TextField
+                    id="standard-full-width"
+                    style={{ margin: 8 }}
+                    helperText="Press enter to save"
+                    fullWidth
+                    margin="normal"
+                    onBlur={() => this.setState({isEditingTitle: false})}
+                    onKeyUp={this.saveTitleEdit}
+                    defaultValue={this.state.title}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  /> :
+                  this.state.title
+                }
+                {
+                this.state.isCurrentUser && 
+                !this.state.isEditingTitle &&
+                <CreateIcon color="primary" style={{cursor:'pointer', margin: '0 10px'}}
+                  onClick={ () => this.setState({isEditingTitle: true}) } 
+                />
+                } 
               </Typography>
               <Typography variant="caption" component="p">
                 {moment(this.state.date).format("MMMM Do YYYY, h:mm a")}

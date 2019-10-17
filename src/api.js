@@ -84,6 +84,18 @@ export const suggestionsApi = {
       .then(handleErrors)
       .then(res => res.json()),
 
+  updateSuggestion: (id, updateData) => 
+    fetch(`${NODE_API_URL}/suggestion/update`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({
+        suggestionId: id,
+        updateData
+      })
+    })
+      .then(handleErrors)
+      .then(res => res.json()),
+
   deleteSuggestion: id =>
     fetch(`${NODE_API_URL}/suggestion/delete`, {
       method: "DELETE",
@@ -109,7 +121,7 @@ export const commentsApi = {
       .then(handleErrors)
       .then(res => {
         toast.success('Added comment successfuly');
-        res.json(); 
+        return res.json(); 
       }),
 
   getAll: () =>
@@ -128,7 +140,7 @@ export const commentsApi = {
       .then(handleErrors)
       .then(res => {
         toast.success('Comment deleted successfuly');
-        res.json(); 
+        return res.json(); 
       }),
 
   updateOne: (id, newContent) =>
@@ -143,7 +155,7 @@ export const commentsApi = {
       .then(handleErrors)
       .then(res => {
         toast.success('Comment updated successfuly');
-        res.json(); 
+        return res.json(); 
       }),
 };
 

@@ -10,7 +10,8 @@ import { bindActionCreators } from "redux";
 
 import {
   getAllSuggestions,
-  addSuggestion
+  addSuggestion,
+  deleteSuggestion
 } from "../../actions/suggestion.actions";
 
 class Suggestions extends Component {
@@ -33,6 +34,8 @@ class Suggestions extends Component {
   handleClose = modal => {
     this.setState({ [modal]: false });
   };
+
+
 
   render() {
     return (
@@ -65,6 +68,7 @@ class Suggestions extends Component {
                     content={s.content}
                     userId={s.userId}
                     id={s._id}
+                    deleteSuggestion={() => this.props.deleteSuggestion(s._id)}
                   />
                 </Grid>
               </Grid>
@@ -83,7 +87,8 @@ const mapActions = dispatch =>
   bindActionCreators(
     {
       getAllSuggestions,
-      addSuggestion
+      addSuggestion,
+      deleteSuggestion
     },
     dispatch
   );

@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Comments(props) {
   const classes = useStyles();
-
   return (
     <List className={classes.root}>
       <Typography variant="overline" component="h3">
@@ -37,13 +36,14 @@ export default function Comments(props) {
         props.commentsList.map(c => {
           return (
             <Comment 
+              key={c._id}
               content={c.content}
               commentId={c._id}
               userName={c.userName}
               userId={c.userId}
               date={c.date}
               updateComment={props.updateComment}
-              deleteComment={() => props.deleteComment(c._id) }
+              deleteComment={ () => props.deleteComment(c._id) }
             />
           )
         })

@@ -19,6 +19,7 @@ const Styles = theme => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
+    height: '360px'
     
   },
   overlay: {
@@ -43,21 +44,24 @@ const Styles = theme => ({
 })
 
 class NewsDetails extends React.Component {
-
   state = {
-    title: '',
-    content : '',
-    date: '',
-    userName: '',
-    img: '',
-  }
+    title: "",
+    content: "",
+    date: "",
+    userName: "",
+    img: ""
+  };
 
-  componentWillMount(){
-    newsApi.getOne(this.props.match.params.id).then( data => {
-      staticFiles.getImage(data.img.filename).then(imageData => {
-        this.setState({ ...data, img: URL.createObjectURL(imageData) });
-      });
-    })
+  componentWillMount() {
+    newsApi.getOne(this.props.match.params.id).then(data => {
+      if(data.img){
+        staticFiles.getImage(data.img.filename).then(imageData => {
+          this.setState({ ...data, img: URL.createObjectURL(imageData) });
+        });
+      } else {
+        this.setState({ ...data, img: 'https://loremflickr.com/640/360' });
+      }
+    });
   }
 
   render() {
@@ -67,9 +71,9 @@ class NewsDetails extends React.Component {
         <CssBaseline />
         <Container maxWidth="lg">
           <main>
-            <Paper 
-              className={classes.mainFeaturedPost} 
-              style={{backgroundImage: `url(${this.state.img})`}}
+            <Paper
+              className={classes.mainFeaturedPost}
+              style={{ backgroundImage: `url(${this.state.img})` }}
             >
               <div className={classes.overlay} />
               <Grid container>
@@ -92,11 +96,13 @@ class NewsDetails extends React.Component {
             </Paper>
             <Grid container spacing={5} className={classes.mainGrid}>
               <Grid item xs={12} md={12}>
-                <Typography variant="h6" gutterBottom>
-                  {moment(this.state.date).format('MMMM Do YYYY, h:mm:ss a')}
+                <Typography variant="h6" gutterBottom color="textSecondary" >
+                  {moment(this.state.date).format("MMMM Do YYYY, h:mm:ss a")}
                 </Typography>
-                <Divider />
-                {this.state.content}
+                <Divider />         
+                <Typography variant="h6" style={{wordWrap: 'break-word'}} gutterBottom>
+                  {this.state.content}
+                </Typography>
               </Grid>
             </Grid>
           </main>
