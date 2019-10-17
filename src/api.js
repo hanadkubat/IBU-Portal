@@ -1,9 +1,11 @@
 import { adalApiFetch } from "./config/adalConfig";
+import { apiUrl } from './config/apiConfig';
 import { toast } from "react-toastify";
 
+
 const BASE_URL = "https://graph.windows.net/hanadkubathotmail.onmicrosoft.com";
-const NODE_API_URL = "http://localhost:8000/api";
-const NODE_STATIC_URL = "http://localhost:8000/uploads";
+const NODE_API_URL = apiUrl + "/api";
+const NODE_STATIC_URL = apiUrl + "/uploads";
 
 export const signedInUser = {
   options: {

@@ -7,7 +7,8 @@ export const adalConfig = {
   endpoints: {
     api: '00000002-0000-0000-c000-000000000000',
   },
-  postLogoutRedirectUri: 'http://localhost:3000',
+  //'http://localhost:3000'
+  postLogoutRedirectUri: 'https://ibu-it-portal.herokuapp.com',
   cacheLocation: 'localStorage',
 };
  
