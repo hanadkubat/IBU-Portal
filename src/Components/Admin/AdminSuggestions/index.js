@@ -43,14 +43,14 @@ class AdminSuggestions extends React.Component {
               item.userName,
               item.title,
               item.content,
-              <Link to={`/dashboard/suggestion/${item._id}`}>
+              <Link key={'link-' + item._id} to={`/dashboard/suggestion/${item._id}`}>
                 {item._id}
               </Link>,
               <Button
                 variant="contained"
                 color="primary"
                 disabled={item.approved}
-                key={item}
+                key={'app-btn-' + item._id}
                 onClick={() => this.approveSuggestion(item._id)}
               >
                 Approve
@@ -58,7 +58,7 @@ class AdminSuggestions extends React.Component {
               <Button
                 variant="contained"
                 color="secondary"
-                key={item}
+                key={'del-btn-' + item._id}
                 onClick={() => this.deleteSuggestion(item._id)}
               >
                 Delete

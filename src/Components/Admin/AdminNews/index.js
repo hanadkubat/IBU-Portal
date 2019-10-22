@@ -64,7 +64,7 @@ class AdminNews extends React.Component {
                 return [
                   item.userName,
                   item.title,
-                  <Link to={`/dashboard/news/article/${item._id}`}>
+                  <Link key={'link-' + item._id} to={`/dashboard/news/article/${item._id}`}>
                     {item._id}
                   </Link>,
                   moment(item.date).format("MMM Do YY, h:mm:ss a"),
@@ -72,7 +72,7 @@ class AdminNews extends React.Component {
                     variant="contained"
                     color="secondary"
                     onClick={() => this.props.deleteNews(item._id)}
-                    key={item._id}
+                    key={'btn-' + item._id}
                   >
                     Delete
                   </Button>

@@ -21,7 +21,7 @@ const useStyles = isPhone =>
     }
   }));
 
-export default function SimpleModal(props) {
+export default function AddNewsModal(props) {
   const classes = useStyles(useMediaQuery("(max-width:400px)"))();
 
   const [title, setTitle] = useState("");
@@ -31,11 +31,8 @@ export default function SimpleModal(props) {
   const submitForm = event => {
     event.preventDefault();
     let formData = new FormData(event.target);
-    /*formData.append("title", title);
-    formData.append("content", multiline);  
-    formData.append("headImage", image);*/
     props.addNews(formData);
-    console.log(event.target)
+    props.handleClose();
   };
 
   return (

@@ -32,10 +32,15 @@ class NewsCard extends React.Component {
   state = {
     imageUrl: null
   };
+
   componentWillMount() {
-    staticFiles.getImage(this.props.img.filename).then(data => {
-      this.setState({ imageUrl: URL.createObjectURL(data) });
-    });
+    if(this.props.img){
+      staticFiles.getImage(this.props.img.filename).then(data => {
+        this.setState({ imageUrl: URL.createObjectURL(data) });
+      })
+    }  else {
+      this.setState({ imageUrl: 'https://loremflickr.com/640/360'});
+    } 
   }
 
   render() {

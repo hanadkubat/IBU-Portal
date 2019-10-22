@@ -21,7 +21,7 @@ const useStyles = isPhone =>
     }
   }));
 
-export default function SimpleModal(props) {
+export default function NewSuggestionModal(props) {
   const classes = useStyles(useMediaQuery("(max-width:400px)"))();
 
   const [title, setTitle] = useState("");
@@ -30,6 +30,7 @@ export default function SimpleModal(props) {
   const submitForm = event => {
     event.preventDefault();
     props.addSuggestionHandler(title, multiline)
+    props.handleClose("newModalOpen")
   };
 
   return (
@@ -40,7 +41,7 @@ export default function SimpleModal(props) {
     >
       <div className={classes.paper}>
         <h4 id="modal-title" className="text-center">
-          Novi prijedlog
+          New Suggestion
         </h4>
         <form onSubmit={submitForm} className={classes.form}>
           <TextField
@@ -73,7 +74,7 @@ export default function SimpleModal(props) {
               size="small"
               className="mx-1"
             >
-              Predlozi
+              Submit
             </Button>
             <Button
               onClick={() => props.handleClose("newModalOpen")}
@@ -81,7 +82,7 @@ export default function SimpleModal(props) {
               size="small"
               className="mx-1"
             >
-              Otkazi
+              Cancel
             </Button>
           </div>
         </form>

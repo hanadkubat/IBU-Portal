@@ -72,7 +72,10 @@ export const suggestionsApi = {
       })
     })
       .then(handleErrors)
-      .then(res => res.json()),
+      .then(res => {
+        toast.success('Suggestion added successfuly, waiting for approval');
+        return res.json()
+      }),
 
   approveSuggestion: id =>
     fetch(`${NODE_API_URL}/suggestion/approve`, {
@@ -84,7 +87,10 @@ export const suggestionsApi = {
       })
     })
       .then(handleErrors)
-      .then(res => res.json()),
+      .then(res => {
+        toast.success('Suggestion approved successfuly');
+        return res.json()
+      }),
 
   updateSuggestion: (id, updateData) => 
     fetch(`${NODE_API_URL}/suggestion/update`, {
@@ -96,7 +102,10 @@ export const suggestionsApi = {
       })
     })
       .then(handleErrors)
-      .then(res => res.json()),
+      .then(res => {
+        toast.success('Suggestion updated successfuly');
+        return res.json()
+      }),
 
   deleteSuggestion: id =>
     fetch(`${NODE_API_URL}/suggestion/delete`, {
@@ -107,7 +116,10 @@ export const suggestionsApi = {
       })
     })
       .then(handleErrors)
-      .then(res => res.json())
+      .then(res => {
+        toast.success('Suggestion deleted successfuly');
+        return res.json()
+      }),
 };
 
 export const commentsApi = {
@@ -169,7 +181,10 @@ export const newsApi = {
       body: formData
     })
       .then(handleErrors)
-      .then(res => res.json()),
+      .then(res => {
+        toast.success('News article added successfuly');
+        return res.json()
+      }),
 
   getAll: () =>
     fetch(`${NODE_API_URL}/news/all`, { headers })
@@ -190,5 +205,8 @@ export const newsApi = {
       })
     })
       .then(handleErrors)
-      .then(res => res.json())
+      .then(res => {
+        toast.success('News article deleted successfuly');
+        return res.json()
+      }),
 };

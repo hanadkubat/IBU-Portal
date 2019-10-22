@@ -31,14 +31,14 @@ class AdminComments extends React.Component {
           data={this.props.comments.map(c => {
             return [
               c.userName,
-              <Link to={`/dashboard/suggestion/${c.suggestionId}`}>
+              <Link key={'link-' + c._id} to={`/dashboard/suggestion/${c.suggestionId}`}>
                 {c.suggestionId}
               </Link>,
               c.content,
               <Button
                 variant="contained"
                 color="secondary"
-                key={c._id}
+                key={'btn-' + c._id}
                 onClick={() => this.props.deleteComment(c._id)}
               >
                 Delete

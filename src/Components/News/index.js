@@ -19,7 +19,7 @@ class News extends Component {
           <Grid container spacing={3}>
             {this.props.news.map(n => {
               return (
-                <Grid item xs={12} md={6}>
+                <Grid key={n._id} item xs={12} md={6}>
                   <Grid container justify="center">
                     <NewsCard 
                         img={n.img}
