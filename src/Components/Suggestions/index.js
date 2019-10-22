@@ -61,7 +61,7 @@ class Suggestions extends Component {
 
           {this.props.suggestions.filter(s => s.approved).map(s => {
             return (
-              <Grid key={s._id} item xs={12} md={6} lg={4} key={s._id}>
+              <Grid key={s._id} item xs={12} md={6} lg={4} >
                 <Grid container justify="center">
                   <Suggestion
                     title={s.title}
