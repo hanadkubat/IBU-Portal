@@ -1,5 +1,5 @@
 {
-  "name": "IBU IT Portal",
+  "name": "ibu-portal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
