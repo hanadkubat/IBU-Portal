@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Paper, makeStyles } from "@material-ui/core";
-import { Comment } from "@material-ui/icons";
 import CloseIcon from "@material-ui/icons/Close";
 import { withRouter } from "react-router-dom";
 import styles from "./Suggestion.module.css";

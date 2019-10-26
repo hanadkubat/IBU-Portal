@@ -23,5 +23,11 @@ export const checkIfCurrentUser = (userIdToVerify) => {
   const decoded = jwtDecode(localStorage.getItem('adal.idtoken'));
   if(userIdToVerify === decoded.oid) return true;
   return false;
-
 }
+
+export const checkIfPowerUser = (userIdToVerify) => {
+  const decoded = jwtDecode(localStorage.getItem('adal.idtoken'));
+  if(decoded.email.indexOf('@ibu.edu.ba') !== -1) return true;
+  return false;
+}
+

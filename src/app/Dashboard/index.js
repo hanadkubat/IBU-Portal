@@ -34,6 +34,8 @@ import AdminNews from "../../Components/Admin/AdminNews";
 import logo from "../../assets/IBU_logo.png";
 import bgImage from "../../assets/about_burch1.jpg";
 
+import { checkIfPowerUser } from "../../config/adalConfig";
+
 const logoStyle = {
   maxWidth: "128px",
   maxHeight: "40px"
@@ -139,6 +141,8 @@ export default function Dashboard() {
     setOpen(false);
   };
 
+  const isPowerUser = checkIfPowerUser(localStorage.getItem('adal.idtoken'));
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -186,7 +190,7 @@ export default function Dashboard() {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        <List>{isPowerUser && secondaryListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
