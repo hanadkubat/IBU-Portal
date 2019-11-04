@@ -69,6 +69,7 @@ export default function AddNewsModal(props) {
             margin="normal"
             helperText="enter news content"
             variant="outlined"
+            rowsMax={7}
           />
           <Button
             variant="contained"

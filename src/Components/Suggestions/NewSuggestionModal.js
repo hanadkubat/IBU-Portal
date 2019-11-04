@@ -47,23 +47,23 @@ export default function NewSuggestionModal(props) {
           <TextField
             required
             id="outlined-required"
-            label="Naslov"
+            label="Title"
             value={title}
             onChange={e => setTitle(e.target.value)}
             className={classes.textField}
             margin="normal"
             variant="outlined"
-            helperText="upisite naslov prijedloga"
+            helperText="enter suggestion title"
           />
           <TextField
             id="outlined-multiline-flexible"
-            label="Prijedlog"
+            label="Content"
             multiline
             required
             value={multiline}
             onChange={e => setMultiline(e.target.value)}
             margin="normal"
-            helperText="upisite tekst prijedloga"
+            helperText="enter suggestion content"
             variant="outlined"
           />
           <div className="mt-2 d-flex flex-wrap">

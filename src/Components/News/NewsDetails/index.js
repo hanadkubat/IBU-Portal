@@ -55,8 +55,13 @@ class NewsDetails extends React.Component {
   componentWillMount() {
     newsApi.getOne(this.props.match.params.id).then(data => {
       if(data.img){
-        staticFiles.getImage(data.img.filename).then(imageData => {
+        staticFiles.getImage(data.img.filename)
+        .then(imageData => {
           this.setState({ ...data, img: URL.createObjectURL(imageData) });
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({ ...data, img: 'https://loremflickr.com/640/360' });
         });
       } else {
         this.setState({ ...data, img: 'https://loremflickr.com/640/360' });
@@ -96,13 +101,15 @@ class NewsDetails extends React.Component {
             </Paper>
             <Grid container spacing={5} className={classes.mainGrid}>
               <Grid item xs={12} md={12}>
-                <Typography variant="h6" gutterBottom color="textSecondary" >
-                  {moment(this.state.date).format("MMMM Do YYYY, h:mm:ss a")}
-                </Typography>
-                <Divider />         
-                <Typography variant="h6" style={{wordWrap: 'break-word'}} gutterBottom>
-                  {this.state.content}
-                </Typography>
+                <Paper className="p-3">
+                  <Typography variant="h6" gutterBottom color="textSecondary" className="my-2 px-4" >
+                    {moment(this.state.date).format("MMMM Do YYYY, h:mm:ss a")}
+                  </Typography>
+                  <Divider />         
+                  <Typography variant="h6" style={{wordWrap: 'break-word'}} gutterBottom className="my-2 px-4">
+                    {this.state.content}
+                  </Typography>
+                </Paper>
               </Grid>
             </Grid>
           </main>
