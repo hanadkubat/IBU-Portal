@@ -190,7 +190,7 @@ export default function Dashboard() {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{/*isPowerUser &&*/ secondaryListItems}</List>
+        <List>{isPowerUser && secondaryListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
