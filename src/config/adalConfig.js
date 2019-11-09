@@ -11,7 +11,7 @@ export const adalConfig = {
     api: '00000003-0000-0000-c000-000000000000',
   },
   //'http://localhost:3000'
-  postLogoutRedirectUri: 'https://ibu-it-portal.herokuapp.com',
+  postLogoutRedirectUri: 'https://www.hanad.xyz',
   cacheLocation: 'localStorage',
 };
  
