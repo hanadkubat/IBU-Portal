@@ -123,7 +123,7 @@ class SuggestionDetails extends React.Component {
                     margin="normal"
                     onBlur={() => this.setState({isEditingTitle: false})}
                     onKeyUp={this.saveTitleEdit}
-                    defaultValue={title}
+                    defaultValue={this.state.title}
                     InputLabelProps={{
                       shrink: true,
                     }}
