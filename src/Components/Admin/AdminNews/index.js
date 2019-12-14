@@ -14,10 +14,11 @@ import { getAllNews, addNews, deleteNews } from "../../../actions/news.actions";
 
 
 
-const columns = ["User", "Title", "ID", "Date", "Delete"];
+const columns = ["User", "Title", "Date", "Delete"];
 const options = {
   filterType: "checkbox",
-  responsive: "scroll"
+  responsive: "scroll",
+  selectableRows: "none"
 };
 
 class AdminNews extends React.Component {
@@ -63,14 +64,14 @@ class AdminNews extends React.Component {
               data={this.props.news.map(item => {
                 return [
                   item.userName,
-                  item.title,
                   <Link key={'link-' + item._id} to={`/dashboard/news/article/${item._id}`}>
-                    {item._id}
+                    {item.title}
                   </Link>,
                   moment(item.date).format("MMM Do YY, h:mm:ss a"),
                   <Button
                     variant="contained"
                     color="secondary"
+                    size="small"
                     onClick={() => this.props.deleteNews(item._id)}
                     key={'btn-' + item._id}
                   >

@@ -91,6 +91,21 @@ export const suggestionsApi = {
         toast.success('Suggestion approved successfuly');
         return res.json()
       }),
+  
+  activateSuggestion: (id, active) => 
+    fetch(`${NODE_API_URL}/suggestion/active`, {
+      method: "PUT",
+      headers,
+      body: JSON.stringify({
+        suggestionId: id,
+        active
+      })
+    })
+      .then(handleErrors)
+      .then(res => {
+        toast.success(`Suggestion set to ${active ? 'active' : 'inactive'}`);
+        return res.json()
+      }),
 
   updateSuggestion: (id, updateData) => 
     fetch(`${NODE_API_URL}/suggestion/update`, {

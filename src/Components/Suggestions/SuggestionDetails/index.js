@@ -7,6 +7,8 @@ import Comments from "./Comments";
 import { suggestionsApi, commentsApi  } from "../../../api";
 import {checkIfCurrentUser} from '../../../config/adalConfig';
 
+import styles from "./SuggestionDetails.module.css";
+
 const useStyles = theme => ({
   root: {
     padding: theme.spacing(3, 2)
@@ -15,7 +17,8 @@ const useStyles = theme => ({
     display: "flex",
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    wordWrap: 'break-word'
   }
 });
 
@@ -102,12 +105,14 @@ class SuggestionDetails extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const title = this.state.title.length > 35 ? this.state.title.slice(0,35) + '...' : this.state.title
+
     return (
       <Grid container spacing={3} justify="center">
         <Grid item xs={12} lg={8}>
           <Paper className={classes.root}>
-            <div className={classes.header}>
-              <Typography variant="h5" component="h3">
+            <div className={[classes.header, styles.no_overflow].join(' ')}>
+              <Typography variant="h5" component="p" style={{ wordWrap: 'break-word' }}>
                 {
                   this.state.isEditingTitle ?
                   <TextField
@@ -118,12 +123,12 @@ class SuggestionDetails extends React.Component {
                     margin="normal"
                     onBlur={() => this.setState({isEditingTitle: false})}
                     onKeyUp={this.saveTitleEdit}
-                    defaultValue={this.state.title}
+                    defaultValue={title}
                     InputLabelProps={{
                       shrink: true,
                     }}
                   /> :
-                  this.state.title
+                  title
                 }
                 {
                 this.state.isCurrentUser && 
@@ -137,7 +142,7 @@ class SuggestionDetails extends React.Component {
                 {moment(this.state.date).format("MMMM Do YYYY, h:mm a")}
               </Typography>
             </div>
-            <Typography component="p" className="mt-4">
+            <Typography component="p" className="mt-4" style={{ wordWrap: 'break-word' }}>
               {this.state.content}
             </Typography>
             <Comments

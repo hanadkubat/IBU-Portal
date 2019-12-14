@@ -12,6 +12,8 @@ import CreateIcon from '@material-ui/icons/Create';
 import TextField from '@material-ui/core/TextField';
 import {checkIfCurrentUser} from '../../../config/adalConfig';
 
+import styles from './SuggestionDetails.module.css';
+
 export default function Comment(props) {
 
   const [isEditing, startEdit] = useState(false)
@@ -58,6 +60,7 @@ export default function Comment(props) {
           <ListItemText
             primary={props.userName}
             secondary={props.content}
+            style={{ wordWrap: 'break-word' }}
           />
         }
         {isCurrentUser && <CreateIcon color="primary" style={{cursor:'pointer'}} onClick={() => startEdit(true)} />} 

@@ -48,6 +48,23 @@ export const approveSuggestion = (id) => (dispatch) => {
     function failure(error) { return { type: "APPROVE_SUGGESTIONS_FAILURE", error } }
 }
 
+export const activateSuggestion = (id, active) => (dispatch) => {
+    dispatch(request())
+    suggestionsApi.activateSuggestion(id, active)
+    .then(data => {
+        console.log(data);
+        dispatch(success(id))
+    })
+    .catch(error => {
+        console.log(error)
+        dispatch(failure(error))
+    })
+    
+    function request() { return { type: "ACTIVATE_SUGGESTIONS_REQUEST" } }
+    function success(id) { return { type: "ACTIVATE_SUGGESTIONS_SUCCESS", suggestionId: id, active } }
+    function failure(error) { return { type: "ACTIVATE_SUGGESTIONS_FAILURE", error } }
+}
+
 export const deleteSuggestion = (id) => (dispatch) => {
     dispatch(request())
     suggestionsApi.deleteSuggestion(id)

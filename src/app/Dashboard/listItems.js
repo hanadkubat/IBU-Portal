@@ -3,10 +3,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
+
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import PeopleIcon from "@material-ui/icons/People";
-import LayersIcon from "@material-ui/icons/Layers";
 import AssignmentIcon from "@material-ui/icons/Assignment";
+import InsertChartIcon from '@material-ui/icons/InsertChart';
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
+import PresentToAllIcon from '@material-ui/icons/PresentToAll';
 
 import { Link } from "react-router-dom";
 import {authContext} from '../../config/adalConfig';
@@ -18,12 +21,20 @@ const linkStyle = {
 
 export const mainListItems = (
   <div>
-    <Link to="/dashboard" style={linkStyle}>
+    <Link to="/dashboard/active" style={linkStyle}>
       <ListItem button>
         <ListItemIcon>
-          <LayersIcon />
+          <PresentToAllIcon />
         </ListItemIcon>
-        <ListItemText primary="Suggestions" />
+        <ListItemText primary="Active Suggestions" />
+      </ListItem>
+    </Link>
+    <Link to="/dashboard/closed" style={linkStyle}>
+      <ListItem button>
+        <ListItemIcon>
+          <CancelPresentationIcon />
+        </ListItemIcon>
+        <ListItemText primary="Closed Suggestions" />
       </ListItem>
     </Link>
     <Link to="/dashboard/news" style={linkStyle}>
@@ -34,6 +45,15 @@ export const mainListItems = (
         <ListItemText primary="News" />
       </ListItem>
     </Link>
+    <Link to="/dashboard/admin/statistics" style={linkStyle}>
+      <ListItem button>
+        <ListItemIcon>
+          <InsertChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Statistics" />
+      </ListItem>
+    </Link>
+
       <ListItem button onClick={() => authContext.logOut()}>
         <ListItemIcon>
           <PeopleIcon />
@@ -73,5 +93,6 @@ export const secondaryListItems = (
         <ListItemText primary="News Articles" />
       </ListItem>
     </Link>
+
   </div>
 );

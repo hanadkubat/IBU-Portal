@@ -28,7 +28,7 @@ function Suggestion(props) {
     <div className={styles.wrapper}>
       <Paper className={classes.root}>
         <Typography
-          className={classes.pointer}
+          className={[styles.no_overflow, classes.pointer].join(" ")}
           variant="h6"
           component="h3"
           onClick={goToSuggestion}

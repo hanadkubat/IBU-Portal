@@ -38,6 +38,8 @@ class Suggestions extends Component {
 
 
   render() {
+    const areClosedSuggestions = this.props.match.path.indexOf('closed') !== -1;
+
     return (
       <div>
         <NewSuggestionModal
@@ -59,7 +61,15 @@ class Suggestions extends Component {
             </Grid>
           </Grid>
 
-          {this.props.suggestions.filter(s => s.approved).map(s => {
+          {this.props.suggestions.filter(s =>{
+              if(areClosedSuggestions && s.approved) {
+                return !s.active;
+              }
+              if(!areClosedSuggestions && s.approved) {
+                return s.active;
+              }
+              return false;
+            }).map(s => {
             return (
               <Grid key={s._id} item xs={12} md={6} lg={4} >
                 <Grid container justify="center">

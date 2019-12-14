@@ -53,6 +53,26 @@ export default function reducer(state = initialState, action) {
         ...state,
         error: action.error
       };
+    case "ACTIVATE_SUGGESTIONS_REQUEST":
+      return {
+        ...state
+      };
+    case "ACTIVATE_SUGGESTIONS_SUCCESS": {
+      let sIndex = state.suggestions.findIndex(
+        s => s._id === action.suggestionId
+      );
+      let suggestions = [...state.suggestions];
+      suggestions[sIndex].active = action.active;
+      return {
+        ...state,
+        suggestions
+      };
+    }
+    case "ACTIVATE_SUGGESTIONS_FAILURE":
+      return {
+        ...state,
+        error: action.error
+      };
     case "DELETE_SUGGESTIONS_REQUEST":
       return {
         ...state

@@ -12,10 +12,11 @@ import {
   deleteComment
 } from "../../../actions/comment.actions";
 
-const columns = ["User", "Suggestion ID", "Comment", "Delete"];
+const columns = ["User", "Comment", "Delete"];
 const options = {
   filterType: "checkbox",
-  responsive: "scroll"
+  responsive: "scroll",
+  selectableRows: "none"
 };
 
 class AdminComments extends React.Component {
@@ -32,11 +33,11 @@ class AdminComments extends React.Component {
             return [
               c.userName,
               <Link key={'link-' + c._id} to={`/dashboard/suggestion/${c.suggestionId}`}>
-                {c.suggestionId}
+                {c.content}
               </Link>,
-              c.content,
               <Button
                 variant="contained"
+                size="small"
                 color="secondary"
                 key={'btn-' + c._id}
                 onClick={() => this.props.deleteComment(c._id)}

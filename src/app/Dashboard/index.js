@@ -23,6 +23,7 @@ import News from "../../Components/News";
 import NewsDetails from "../../Components/News/NewsDetails";
 import Suggestions from "../../Components/Suggestions";
 import SuggestionDetails from "../../Components/Suggestions/SuggestionDetails";
+import Statistics from "../../Components/Statistics";
 import NotFound from "../../Components/NotFound";
 
 //custom admin components
@@ -171,7 +172,7 @@ export default function Dashboard() {
             noWrap
             className={classes.title}
           >
-            <img src={logo} alt="mibo" style={logoStyle} />
+            <img src={logo} alt="burch" style={logoStyle} />
           </Typography>
         </Toolbar>
       </AppBar>
@@ -197,12 +198,15 @@ export default function Dashboard() {
         <Container maxWidth="lg" className={classes.container}>
           <Switch>
             <Route exact path="/dashboard" component={Suggestions} />
+            <Route exact path="/dashboard/active" component={Suggestions} />
+            <Route exact path="/dashboard/closed" component={Suggestions} />
             <Route exact path="/dashboard/news" component={News} />
             <Route exact path="/dashboard/suggestion/:id" component={SuggestionDetails} />
             <Route exact path="/dashboard/news/article/:id" component={NewsDetails} />
             <Route path="/dashboard/admin/suggestions" component={AdminSuggestions} />
             <Route path="/dashboard/admin/comments" component={AdminComments} />
             <Route path="/dashboard/admin/news" component={AdminNews} />
+            <Route path="/dashboard/admin/statistics" component={Statistics} />
             <Route component={NotFound} />
           </Switch>
         </Container>
