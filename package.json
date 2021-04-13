@@ -12,7 +12,7 @@
     "moment": "^2.24.0",
     "mui-datatables": "^2.12.4",
     "react": "^16.11.0",
-    "react-adal": "^0.4.24",
+    "react-adal": "^0.5.1",
     "react-azure-adb2c": "^0.2.0",
     "react-chartjs-2": "^2.8.0",
     "react-dom": "^16.11.0",
